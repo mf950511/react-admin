@@ -1,0 +1,10 @@
+.hello{
+  color: green;
+  background: url('./big.png') no-repeat;
+}
+.asd{
+  height: 300px;
+  position: absolute;
+  width: 100%;
+  top: 12px;
+}
