@@ -68,14 +68,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.tsx?$/,
-        use: ['ts-loader'],
+        test: /\.(ts|js)x?$/,
+        use: ['babel-loader'],
         exclude: /node-modules/
       }
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.json']
   },
   plugins: [
     new HtmlWebpackPlugin({

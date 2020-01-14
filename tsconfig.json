@@ -3,9 +3,23 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "es6",
-    "target": "es5",
+    "target": "esnext",
     "jsx": "react",
     "allowJs": true,
-    "sourceMap": true
-  }
+    "sourceMap": true,
+    "lib": [
+			"es2015",
+			"dom.iterable",
+			"es2016.array.include",
+			"es2017.object",
+			"dom"
+    ],
+    "moduleResolution": "node",// 用于解析一些加载器，如css-type, source-map
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
 }
