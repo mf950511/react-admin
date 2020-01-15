@@ -9,6 +9,39 @@ module.exports = merge(common, {
     filename: '[name].js', // [chunkhash]用于生成hash值，避免缓存
     path: path.resolve(__dirname, 'dist')
   },
+  module: {
+    rules: [
+      {
+        test: /\.(le|c)ss$/,
+        use: [//加载从右往左
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',// 为各大浏览器加前缀
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: loaders => [
+                require('autoprefixer')({
+                })
+              ]
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
+    ]
+  },
   devtool: 'inline-source-map', // 是否可以代码寻错
   plugins: [
     new webpack.NamedModulesPlugin(), // 热更新时返回文件名而不是文件id

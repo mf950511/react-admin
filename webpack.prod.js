@@ -15,6 +15,39 @@ module.exports = merge(common, {
     path: path.resolve(__dirname, 'dist'),
     chunkFilename: '[name].bundle.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\.(le|c)ss$/,
+        use: [//加载从右往左
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'postcss-loader',// 为各大浏览器加前缀
+            options: {
+              ident: 'postcss',
+              sourceMap: true,
+              plugins: loaders => [
+                require('autoprefixer')({
+                })
+              ]
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
+      }
+    ]
+  },
   plugins: [
     new MiniCssExtractPlugin({// 将css打包成单独的css文件
       filename: devMode ? '[name].css' : '[name].[hash:5].css',
