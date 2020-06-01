@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 10:56:43
- * @LastEditTime: 2020-06-01 14:01:04
+ * @LastEditTime: 2020-06-01 16:32:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\src\api\request.js
@@ -10,7 +10,7 @@ import axios from 'axios'
 import { message } from 'antd'
 
 // 添加请求拦截器
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function (config: any) {
   // 在发送请求之前做些什么
   const { url = '' } = config
   if(!/^\/api\/user\//.test(url)) {
@@ -18,15 +18,16 @@ axios.interceptors.request.use(function (config) {
     console.log('要去登录页了')
   }
   return config;
-}, function (error) {
+}, function (error: any) {
   console.log('我出错了')
   // 对请求错误做些什么
   return Promise.reject(error);
 });
 
-axios.interceptors.response.use(function (config) {
+axios.interceptors.response.use(function (config: any) {
   console.log('响应请求成功', config)
-}, function (error) {
+  return config
+}, function (error: any) {
   console.log('响应请求错误', error)
   if (error === undefined || error.code === 'ECONNABORTED') {
     message.warning('服务请求超时')
