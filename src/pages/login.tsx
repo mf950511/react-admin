@@ -34,11 +34,6 @@ const Login = (props) => {
     })
   }
 
-  const increment1 = () => {
-    // const { increment } = this.props
-    console.log(3333, props.increment)
-    props.increment()
-  }
   console.log(123123, process.env.NODE_ENV)
   return (
     <div className="login-wrapper">
