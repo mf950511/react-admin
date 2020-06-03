@@ -4,9 +4,27 @@ import { Form, Button, Checkbox, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 const { useState } = React
 import request from '../api/request'
+import { connect } from 'react-redux'
+import { increment, decrement } from '../actions/index'
 console.log(request)
 
-function Login(){
+function mapStateToProps(state: any){
+  const { crement } = state
+  console.log(crement)
+  return {
+    num: crement.num
+  }
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    increment: () => dispatch(increment()),
+    decrement: () => dispatch(decrement())
+  }
+}
+
+
+const Login = (props) => {
   const onFinish = (values: any) => {
     console.log(values)
     request('/asdasd').then(res => {
@@ -15,15 +33,23 @@ function Login(){
       console.log(err)
     })
   }
+
+  const increment1 = () => {
+    // const { increment } = this.props
+    console.log(3333, props.increment)
+    props.increment()
+  }
   console.log(123123, process.env.NODE_ENV)
   return (
     <div className="login-wrapper">
+      
       <Form
         name="normal_login"
         className="login-form"
         onFinish={onFinish}
       >
-        <h3 className="form-title">系统登录</h3>
+        <h3 className="form-title" onClick={props.decrement}>系统登录</h3>
+        <h3 onClick={props.increment}>{ props.num }123</h3>
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入账号！' }]}
@@ -50,4 +76,4 @@ function Login(){
   )
 }
 
-export default Login
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

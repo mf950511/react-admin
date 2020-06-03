@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 10:56:43
- * @LastEditTime: 2020-06-01 16:33:11
+ * @LastEditTime: 2020-06-02 09:19:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\src\api\request.js
  */ 
 import axios from 'axios'
-import './config.js'
+import './config.ts'
 
 const request = async (_options: any) => {
   // 默认GET方法
