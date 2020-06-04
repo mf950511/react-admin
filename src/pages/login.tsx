@@ -5,26 +5,35 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 const { useState } = React
 import request from '../api/request'
 import { connect } from 'react-redux'
-import { increment, decrement } from '../actions/index'
+import { AppState } from '../store/index'
+import { Dispatch } from 'redux'
+import { incrementAction, decrementAction } from '../store/number/actions'
+
 console.log(request)
+interface AppStateProps {
+  number: number
+}
+interface AppDispatchProps {
+  increment: (number: number) => void;
+  decrement: (number: number) => void;
+}
 
-function mapStateToProps(state: any){
-  const { crement } = state
-  console.log(crement)
+type reduxType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+
+function mapStateToProps(state: AppState): AppStateProps{
   return {
-    num: crement.num
+    number: state.numberReducer
   }
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Dispatch): AppDispatchProps {
   return {
-    increment: () => dispatch(increment()),
-    decrement: () => dispatch(decrement())
+    increment: (number: number) => dispatch(incrementAction(number)),
+    decrement: (number: number) => dispatch(decrementAction(number))
   }
 }
 
-
-const Login = (props) => {
+const Login = (props: reduxType) => {
   const onFinish = (values: any) => {
     console.log(values)
     request('/asdasd').then(res => {
@@ -37,14 +46,13 @@ const Login = (props) => {
   console.log(123123, process.env.NODE_ENV)
   return (
     <div className="login-wrapper">
-      
       <Form
         name="normal_login"
         className="login-form"
         onFinish={onFinish}
       >
-        <h3 className="form-title" onClick={props.decrement}>系统登录</h3>
-        <h3 onClick={props.increment}>{ props.num }123</h3>
+        <h3 className="form-title" onClick={() => { props.increment(12) }}>系统登录</h3>
+        <h3 onClick={() => { props.decrement(10) }}>{ props.number }123</h3>
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入账号！' }]}

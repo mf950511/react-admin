@@ -4,9 +4,9 @@ import * as React from 'react'
 import './src/common/css/index.css'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import reducer from './src/reducer/index'
+import reducer from './src/store/index'
 
-const store = createStore(reducer, { } )
+const store = createStore(reducer)
 
 const renderDom = (Component: any) => {
   return render(
