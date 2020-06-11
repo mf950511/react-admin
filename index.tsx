@@ -1,22 +1,21 @@
-import Route from './src/router/route'
-import { render } from 'react-dom'
+import * as ReactDOM from 'react-dom'
 import * as React from 'react'
 import './src/common/css/index.css'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import reducer from './src/store/index'
+import App from './App'
+import configureStore, { history } from './configStore'
+export const store = configureStore()
 
-const store = createStore(reducer)
-
-const renderDom = (Component: any) => {
-  return render(
+const render = () => {
+  ReactDOM.render(
     <Provider store={ store }>
-      <Component/>
-    </Provider>
-  , document.querySelector('#app'))
+      <App history={ history }/>
+    </Provider>,
+    document.querySelector('#app')
+  )
 }
 
-renderDom(Route)
+render()
 
 
 
