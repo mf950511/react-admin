@@ -1,42 +1,23 @@
 import * as React from 'react'
 import '@/common/css/login.less'
-import { Form, Button, Checkbox, Input } from 'antd'
+import { Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 const { useState } = React
-import request from '../api/request'
-import { connect } from 'react-redux'
+import { get, post } from '../api/request'
+import { useSelector, useDispatch } from 'react-redux'
+import { INCREMENT, DECREMENT } from '../store/number/types'
 import { AppState } from '../store/index'
-import { Dispatch } from 'redux'
-import { incrementAction, decrementAction } from '../store/number/actions'
 
-console.log(request)
-interface AppStateProps {
-  number: number
-}
-interface AppDispatchProps {
-  increment: (number: number) => void;
-  decrement: (number: number) => void;
-}
 
-type reduxType = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+console.log(get)
 
-function mapStateToProps(state: AppState): AppStateProps{
-  return {
-    number: state.numberReducer
-  }
-}
+const Login = () => {
+  const number = useSelector((state: AppState) => state.numberReducer)
+  const dispatch = useDispatch()
 
-function mapDispatchToProps(dispatch: Dispatch): AppDispatchProps {
-  return {
-    increment: (number: number) => dispatch(incrementAction(number)),
-    decrement: (number: number) => dispatch(decrementAction(number))
-  }
-}
-
-const Login = (props: reduxType) => {
   const onFinish = (values: any) => {
     console.log(values)
-    request('/asdasd').then(res => {
+    post('/asdasd', values).then(res => {
       console.log(res)
     }, err => {
       console.log(err)
@@ -51,8 +32,8 @@ const Login = (props: reduxType) => {
         className="login-form"
         onFinish={onFinish}
       >
-        <h3 className="form-title" onClick={() => { props.increment(12) }}>系统登录</h3>
-        <h3 onClick={() => { props.decrement(10) }}>{ props.number }123</h3>
+        <h3 className="form-title" onClick={() => { dispatch({ type: INCREMENT, payload: 10 }) }}>系统登录</h3>
+        <h3 onClick={() => { dispatch({ type: DECREMENT, payload: 10 }) }}>{ number }123</h3>
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入账号！' }]}
@@ -79,4 +60,4 @@ const Login = (props: reduxType) => {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login
