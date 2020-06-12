@@ -1,7 +1,17 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-31 14:41:56
+ * @LastEditTime: 2020-06-12 10:57:45
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \react-admin\webpack.dev.js
+ */ 
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 const path = require('path')
 const webpack = require('webpack')
+
+console.log('development')
 
 module.exports = merge(common, {
   mode: 'development',
@@ -64,11 +74,11 @@ module.exports = merge(common, {
     },
     quiet: true,
     proxy: { // 代理
-      '/dev': {
-        target: 'http://dev.xxxx.com.cn',
+      '/api': {
+        target: 'http://127.0.0.1:8888/',
         changeOrigin: true,
         pathRewrite: {
-          '^dev': '/order/api'
+          // '^/api': ''
         }
       }
     },

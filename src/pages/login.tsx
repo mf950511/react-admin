@@ -17,7 +17,10 @@ const Login = () => {
 
   const onFinish = (values: any) => {
     console.log(values)
-    post('/asdasd', values).then(res => {
+    post('/api/user/login', values).then(res => {
+      const data = res.data || {}
+      const { sessionId } = data
+      localStorage.setItem('sessionId', sessionId)
       console.log(res)
     }, err => {
       console.log(err)

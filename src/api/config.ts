@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 10:56:43
- * @LastEditTime: 2020-06-11 19:19:30
+ * @LastEditTime: 2020-06-12 11:01:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\src\api\request.js
@@ -29,7 +29,7 @@ axios.interceptors.request.use(function (config: RequestAxios) {
 axios.interceptors.response.use(function (response: any) {
   console.log('响应请求成功', response)
   const res = response.data
-  if(response.status !== 200 || res.status !== 200) {
+  if(response.status !== 200 || res.code !== 0) {
     message.error(res.message)
   } else {
     return res
