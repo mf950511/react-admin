@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 14:42:05
- * @LastEditTime: 2020-06-17 15:31:00
+ * @LastEditTime: 2020-06-17 15:34:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\webpack.prod.js
@@ -11,7 +11,7 @@ const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const  MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = merge(common, {
