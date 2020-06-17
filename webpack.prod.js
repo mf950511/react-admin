@@ -1,12 +1,19 @@
+/*
+ * @Author: your name
+ * @Date: 2019-12-31 14:42:05
+ * @LastEditTime: 2020-06-17 15:31:00
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \react-admin\webpack.prod.js
+ */ 
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const  MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const devMode = process.env.NODE_ENV !== 'production'
 const path = require('path')
-console.log(devMode, process.env.NODE_ENV)
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = merge(common, {
   mode: "production",
   devtool: 'source-map',
@@ -49,10 +56,18 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({// 将css打包成单独的css文件
-      filename: devMode ? '[name].css' : '[name].[hash:5].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash:5].css'
-    }), 
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'server',
+      analyzerHost: '127.0.0.1',
+      analyzerPort: 8889,
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
+      openAnalyzer: true,
+      generateStatsFile: false,
+      statsFilename: 'stats.json',
+      statsOptions: null,
+      logLevel: 'info'
+    })
     // new webpack.DefinePlugin({ // 配置环境变量
     //   'process.env.NODE_ENV': JSON.stringify('production')
     // })

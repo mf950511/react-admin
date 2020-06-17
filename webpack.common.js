@@ -1,6 +1,9 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const devMode = process.env.NODE_ENV !== 'production'
+console.log(devMode, process.env.NODE_ENV)
 // 用于worker缓存，处理网络链接错误
 // const WorkboxPlugin = require('workbox-webpack-plugin')
 // console.log(WorkboxPlugin)
@@ -93,6 +96,10 @@ module.exports = {
       }
     }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({// 将css打包成单独的css文件
+      filename: devMode ? '[name].css' : '[name].[hash:5].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash:5].css'
+    })
     // new WorkboxPlugin.GenerateSW({ // 静态服务，用于支持worker的浏览器在服务挂了之后继续访问
     //   clientsClaim: true,
     //   skipWaiting: true
