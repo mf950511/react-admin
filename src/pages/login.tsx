@@ -2,17 +2,14 @@ import * as React from 'react'
 import '@/common/css/login.less'
 import { Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-const { useState } = React
 import { get, post } from '../api/request'
-import { useSelector, useDispatch } from 'react-redux'
-import { INCREMENT, DECREMENT } from '../store/number/types'
-import { AppState } from '../store/index'
+import { useDispatch } from 'react-redux'
+import { push } from 'connected-react-router'
 
 
 console.log(get)
 
 const Login = () => {
-  const number = useSelector((state: AppState) => state.numberReducer)
   const dispatch = useDispatch()
 
   const onFinish = (values: any) => {
@@ -21,7 +18,8 @@ const Login = () => {
       const data = res.data || {}
       const { sessionId } = data
       localStorage.setItem('sessionId', sessionId)
-      console.log(res)
+      console.log(123213, sessionId)
+      dispatch(push('/home'))
     }, err => {
       console.log(err)
     })
@@ -35,8 +33,7 @@ const Login = () => {
         className="login-form"
         onFinish={onFinish}
       >
-        <h3 className="form-title" onClick={() => { dispatch({ type: INCREMENT, payload: 10 }) }}>系统登录</h3>
-        <h3 onClick={() => { dispatch({ type: DECREMENT, payload: 10 }) }}>{ number }123</h3>
+        <h3 className="form-title">系统登录</h3>
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入账号！' }]}
