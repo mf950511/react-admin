@@ -3,14 +3,13 @@ import '@/common/css/login.less'
 import { Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { get, post } from '../api/request'
-import { useDispatch } from 'react-redux'
-import { push } from 'connected-react-router'
+import { useHistory } from 'react-router-dom'
 
 
 console.log(get)
 
 const Login = () => {
-  const dispatch = useDispatch()
+  const history = useHistory()
 
   const onFinish = (values: any) => {
     console.log(values)
@@ -19,7 +18,7 @@ const Login = () => {
       const { sessionId } = data
       localStorage.setItem('sessionId', sessionId)
       console.log(123213, sessionId)
-      dispatch(push('/home'))
+      history.push('/home')
     }, err => {
       console.log(err)
     })
