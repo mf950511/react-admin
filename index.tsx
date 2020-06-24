@@ -1,6 +1,6 @@
 import * as ReactDOM from 'react-dom'
 import * as React from 'react'
-import './src/common/css/index.css'
+import "common/css/index.css"
 import { Provider } from 'react-redux'
 import App from './App'
 import configureStore, { history } from './configStore'

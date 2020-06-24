@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { Layout, Menu } from 'antd'
+import { useDispatch } from 'react-redux'
+import { push } from 'connected-react-router'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
 const { useState } = React
 import '@/common/css/home.less'
 import { Breadcrumb } from 'antd';
+import * as Icons from '@ant-design/icons';
 import { 
-  BankOutlined, 
-  FileTextOutlined,
-  SendOutlined,
-  PropertySafetyOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined 
 } from '@ant-design/icons';
@@ -32,33 +31,45 @@ const menu = [
   {
     name: '首页',
     icon: 'BankOutlined',
+    path: '/home',
   },
   {
     name: '文档',
     icon: 'FileTextOutlined',
+    path: '/doc',
   },
   {
     name: '引导页',
     icon: 'SendOutlined',
+    path: '/guide',
   },
   {
     name: '权限测试页',
     icon: 'PropertySafetyOutlined',
+    path: '/authority',
     children: [
       {
         name: '页面权限',
+        path: '/pageAuthority',
       },
       {
         name: '角色权限',
+        path: '/characterAuthority',
+        icon: 'SendOutlined',
       },
       {
         name: '子路由',
+        path: '/child',
         children: [
           {
-            name: "路由1"
+            name: "路由1",
+            path: '/route1',
+            icon: 'SendOutlined',
           },
           {
-            name: '路由2'
+            name: '路由2',
+            path: '/route2',
+            icon: 'SendOutlined',
           }
         ]
       }
@@ -66,58 +77,55 @@ const menu = [
   }
 ]
 
-const sideBarTree = (arr: object[]) => {
-  if(arr && arr.length) {
-    return arr.map(item => (
-      arr.children 
-      ? 
-      <SubMenu className="home-menu" popupClassName="home-sider" icon={<PropertySafetyOutlined />} title="权限测试页">
-        { sideBarTree(arr.children) }
-      </SubMenu> : <Menu.Item className="home-menu-item"></Menu.Item>
-    ))
+interface SideBar{
+  name: string;
+  children?: Array<SideBar>,
+  [propName: string]: any;
+}
+
+interface Icons { // 处理icon的类型
+  [PropName: string]: any
+}
+
+const getIcons = (str: string, Icons: Icons) => {
+  const TestBankOutlined = Icons[str]
+  return <TestBankOutlined />
+}
+
+const sideBarTree = (menuArr: SideBar[]) => {
+  if(menuArr && menuArr.length) {
+    return menuArr.map((item, index) => {
+      return (
+        item.children 
+        ? 
+        <SubMenu className="home-menu" popupClassName="home-sider" key={ item.path } icon={ item.icon ? getIcons(item.icon, Icons) : '' } title={ item.name }>
+          { sideBarTree(item.children) }
+        </SubMenu> : <Menu.Item className="home-menu-item" icon={ item.icon ? getIcons(item.icon, Icons) : '' } key={ item.path }>{ item.name }</Menu.Item>
+      )
+    })
+  } else {
+    return null
   }
 }
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false)
+  const dispatch = useDispatch()
+
+
+  const clickMenu = (item: any) => {
+    const { keyPath = [] } = item
+    console.log(3333333, keyPath.join(''))
+    dispatch(push(keyPath.join('')))
+  }
+
   return (
     <Layout className="home-wrapper">
       <Sider className="home-sider" trigger={ null } collapsible collapsed={ collapsed } >
-        <Menu theme="dark" mode="inline" className="home-menu">
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['/home']} onClick={ clickMenu } className="home-menu">
           {
-            menu.map(item => (
-              item.children 
-              ? 
-              <SubMenu className="home-menu" popupClassName="home-sider" icon={<PropertySafetyOutlined />} title="权限测试页">
-
-              </SubMenu> : <Menu.Item className="home-menu-item"></Menu.Item>
-            ))
+            sideBarTree(menu)
           }
-          <Menu.Item className="home-menu-item" icon={ <BankOutlined/> }>
-            首页
-          </Menu.Item>
-          <Menu.Item className="home-menu-item" icon={ <FileTextOutlined /> }>
-            文档
-          </Menu.Item>
-          <Menu.Item className="home-menu-item" icon={ <SendOutlined /> }>
-            引导页
-          </Menu.Item>
-          <SubMenu className="home-menu" popupClassName="home-sider" icon={<PropertySafetyOutlined />} title="权限测试页">
-            <Menu.Item className="home-menu-item">
-              页面权限
-            </Menu.Item>
-            <Menu.Item className="home-menu-item">
-              角色权限
-            </Menu.Item>
-            <SubMenu className="home-menu" popupClassName="home-sider" icon={<PropertySafetyOutlined />} title="权限测试页">
-              <Menu.Item className="home-menu-item">
-                页面权限
-              </Menu.Item>
-              <Menu.Item className="home-menu-item">
-                角色权限
-              </Menu.Item>
-            </SubMenu>
-          </SubMenu>
         </Menu>
       </Sider>
       <Layout>

@@ -76,7 +76,12 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.json'],
     alias: {
-      "@": path.resolve(__dirname, 'src')
+      "@": path.resolve(__dirname, 'src'),
+      "store": path.resolve(__dirname, 'src/store'),
+      "router": path.resolve(__dirname, 'src/router'),
+      "pages": path.resolve(__dirname, 'src/pages'),
+      "common": path.resolve(__dirname, 'src/common'),
+      "api": path.resolve(__dirname, 'src/api'),
     }
   },
   plugins: [

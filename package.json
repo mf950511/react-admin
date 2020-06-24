@@ -59,6 +59,7 @@
     "watch": "webpack --watch",
     "server-start": "http-server dist",
     "check-types": "tsc",
+    "check": "tsc -watch",
     "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build"
   },
   "browserslist": [

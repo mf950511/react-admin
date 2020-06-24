@@ -1,7 +1,7 @@
-import Login from '../pages/login'
-import Test from '../pages/test2'
-import Error from '../pages/error'
-import Home from '../pages/home'
+import Login from 'pages/login'
+import Test from 'pages/test2'
+import Error from 'pages/error'
+import Home from 'pages/home'
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import * as React from 'react'
 
