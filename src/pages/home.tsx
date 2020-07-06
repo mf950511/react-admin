@@ -1,13 +1,20 @@
 import * as React from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Switch } from 'antd'
 import { useDispatch } from 'react-redux'
-import { push } from 'connected-react-router'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
 const { useState } = React
 import '@/common/css/home.less'
 import { Breadcrumb } from 'antd';
 import * as Icons from '@ant-design/icons';
+import { Route, Redirect, useHistory,HashRouter as Router, Switch as RouterSwitch } from 'react-router-dom'
+import Doc from 'pages/doc'
+import Guide from 'pages/guide'
+import PageAuthority from 'pages/pageAuthority'
+import UserAuthority from 'pages/userAuthority'
+import RouterTest1 from 'pages/routerTest'
+import RouterTest2 from 'pages/routerTest2'
+import HomeIndex from 'pages/homeIndex'
 import { 
   MenuFoldOutlined,
   MenuUnfoldOutlined 
@@ -36,17 +43,17 @@ const menu = [
   {
     name: '文档',
     icon: 'FileTextOutlined',
-    path: '/doc',
+    path: '/home/doc',
   },
   {
     name: '引导页',
     icon: 'SendOutlined',
-    path: '/guide',
+    path: '/home/guide',
   },
   {
     name: '权限测试页',
     icon: 'PropertySafetyOutlined',
-    path: '/authority',
+    path: '/home/authority',
     children: [
       {
         name: '页面权限',
@@ -63,12 +70,12 @@ const menu = [
         children: [
           {
             name: "路由1",
-            path: '/route1',
+            path: '/routerTest1',
             icon: 'SendOutlined',
           },
           {
             name: '路由2',
-            path: '/route2',
+            path: '/routerTest2',
             icon: 'SendOutlined',
           }
         ]
@@ -111,12 +118,14 @@ const sideBarTree = (menuArr: SideBar[]) => {
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false)
   const dispatch = useDispatch()
+  const history = useHistory()
 
 
   const clickMenu = (item: any) => {
     const { keyPath = [] } = item
-    console.log(3333333, keyPath.join(''))
-    dispatch(push(keyPath.join('')))
+    const path = keyPath.reverse().join('')
+    console.log(3333333, path, keyPath)
+    history.push(path)
   }
 
   return (
@@ -139,7 +148,18 @@ const Home = () => {
           </Breadcrumb>
         </Header>
         <Content className="home-content">
-
+          <Router>
+            <RouterSwitch>
+              <Route path="/home/index" component={ HomeIndex }></Route>
+              <Route path="/home/doc" component={ Doc }></Route>
+              <Route path="/home/guide" component={ Guide }></Route>
+              <Route path="/home/authority/pageAuthority" component={ PageAuthority }></Route>
+              <Route path="/home/authority/characterAuthority" component={ UserAuthority }></Route>
+              <Route path="/home/authority/child/routerTest1" component={ RouterTest1 }></Route>
+              <Route path="/home/authority/child/routerTest2" component={ RouterTest2 }></Route>
+              <Redirect to="/home/index" from="/home"></Redirect>
+            </RouterSwitch>
+          </Router>
         </Content>
       </Layout>
     </Layout>
