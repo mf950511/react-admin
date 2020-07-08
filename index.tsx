@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import App from './App'
 import configureStore, { history } from './configStore'
 export const store = configureStore()
+require('common/js/iconfont')
 
 const render = () => {
   ReactDOM.render(

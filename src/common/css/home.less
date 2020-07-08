@@ -16,45 +16,57 @@
       }
     }
   }
-  .home-content{
-    position: relative;
+  /* 路由动画相关样式 */
+  .route-enter, .route-appear {
+    opacity: 0;
+    transform: translateX(-200px);
   }
-  /* 动画相关样式 */
-.route-enter, .route-appear {
-  opacity: 0;
-  transform: translateX(-200px);
-}
 
-.route-enter.route-enter-active, .route-appear.route-appear-active {
-  opacity: 1;
-  transition: all 300ms;
-  transform: translateX(0);
-}
+  .route-enter.route-enter-active, .route-appear.route-appear-active {
+    opacity: 1;
+    transition: all 300ms;
+    transform: translateX(0);
+  }
 
-.route-exit {
-  opacity: 0;
-}
+  .route-exit {
+    opacity: 0;
+  }
 
-.route-exit.route-exit-active {
-  opacity: 0;
-}
-  // .home-sider, .home-menu{
-  //   background: @menu_bg_color;
-  // }
-  // .home-menu-item{
-  //   line-height: 56px!important;
-  //   height: 56px!important;
-  //   margin: 0!important;
-  //   color: @menu_color;
-  //   &:hover{
-  //     background: @menu_bg_active_color;
-  //     color: @menu_color;
-  //   }
-  //   &.ant-menu-item-selected{ // 选中状态
-  //     background: @menu_bg_color!important;
-  //     .anticon,.anticon + span{
-  //       color: @menu_active_color!important
-  //     }
-  //   }
-  // }
+  .route-exit.route-exit-active {
+    opacity: 0;
+  }
+
+  .guide{
+    padding: 60px 40px;
+  }
+
+  .statistics-wrapper{
+    .statistics{
+      background: #fff;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      justify-content: space-between;
+      .statistics-icon{
+        width: 80px;
+        height: 80px;
+        .icon{
+          font-size: 60px;
+        }
+      }
+      .statistics-show{
+        flex: 1;
+        text-align: right;
+        font-weight: 700;
+        color: #666;
+        font-size: 20px;
+        .statistics-title{
+          margin-bottom: 8px;
+          color: rgba(0, 0, 0, 0.45);
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }

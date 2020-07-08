@@ -158,7 +158,7 @@ const Home = () => {
 
   return (
     <Layout className="home-wrapper">
-      <Sider className="home-sider" trigger={ null } collapsible collapsed={ collapsed } >
+      <Sider className="home-sider" breakpoint="lg" collapsedWidth="0" zeroWidthTriggerStyle={{ display: 'none' }} collapsible={true} onBreakpoint={ (state: boolean) => { setCollapsed(state) } } collapsed={ collapsed } >
         <Menu theme="dark" mode="inline" selectedKeys={activeMenu} onClick={ clickMenu } className="home-menu">
           {
             sideBarTree(menu)
@@ -188,7 +188,6 @@ const Home = () => {
               key={location.pathname}
               classNames="route"
               timeout={300}
-              unmountOnExit={true}
               >
                 <RouterSwitch location={location}>
                   <Route path="/home/index" component={ HomeIndex }></Route>
