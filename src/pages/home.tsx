@@ -185,11 +185,12 @@ const Home = () => {
             <TransitionGroup>
               <CSSTransition
               in={inProp}
-              key={location.key}
-              classNames="my-node"
+              key={location.pathname}
+              classNames="route"
               timeout={300}
+              unmountOnExit={true}
               >
-                <RouterSwitch>
+                <RouterSwitch location={location}>
                   <Route path="/home/index" component={ HomeIndex }></Route>
                   <Route path="/home/doc" component={ Doc }></Route>
                   <Route path="/home/guide" component={ Guide }></Route>

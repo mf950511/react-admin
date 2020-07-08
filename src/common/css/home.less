@@ -16,6 +16,28 @@
       }
     }
   }
+  .home-content{
+    position: relative;
+  }
+  /* 动画相关样式 */
+.route-enter, .route-appear {
+  opacity: 0;
+  transform: translateX(-200px);
+}
+
+.route-enter.route-enter-active, .route-appear.route-appear-active {
+  opacity: 1;
+  transition: all 300ms;
+  transform: translateX(0);
+}
+
+.route-exit {
+  opacity: 0;
+}
+
+.route-exit.route-exit-active {
+  opacity: 0;
+}
   // .home-sider, .home-menu{
   //   background: @menu_bg_color;
   // }
