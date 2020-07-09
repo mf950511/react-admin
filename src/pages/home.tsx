@@ -16,6 +16,7 @@ import RouterTest2 from 'pages/routerTest2'
 import HomeIndex from 'pages/homeIndex'
 import { SideBar, IconObject, RouteInfo } from 'types/home'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { useNormalDispatchEffect } from 'pages/effect/reducer'
 import { 
   MenuFoldOutlined,
   MenuUnfoldOutlined 
@@ -113,8 +114,6 @@ const Home = () => {
   // 路由栈初始值
   const initState: RouteInfo = {}
   const initActiveMenu: Array<string> = ['/home']
-  // 切换侧边栏收起状态
-  const [collapsed, setCollapsed] = useState(false)
   // 页面所有路由信息
   const [routerInfo, setRouterInfo] = useState(initState)
   // 当前路由栈信息
@@ -122,6 +121,8 @@ const Home = () => {
   const [activeMenu, setActiveMenu] = useState(initActiveMenu)
   const location = useLocation()
   const history = useHistory()
+  // 切换侧边栏收起状态
+  const [collapsed, setCollapsed] = useNormalDispatchEffect('collapsed')
 
   // 获取当前路由信息
   const getCurrentLocation = () => {
@@ -131,7 +132,6 @@ const Home = () => {
       const url = `/${ pathArr.slice(0, index + 1).join('/') }`
       return url
     })
-    console.log(66666, currentPath, currentPatharr)
     setActiveMenu([currentPath])
     setCurrentRoute(currentPatharr)
   }

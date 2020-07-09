@@ -82,7 +82,8 @@ module.exports = {
       "pages": path.resolve(__dirname, 'src/pages'),
       "common": path.resolve(__dirname, 'src/common'),
       "api": path.resolve(__dirname, 'src/api'),
-      "types": path.resolve(__dirname, 'src/types')
+      "types": path.resolve(__dirname, 'src/types'),
+      "lib": path.resolve(__dirname, 'src/lib')
     }
   },
   plugins: [

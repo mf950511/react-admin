@@ -2,6 +2,7 @@ import * as React from 'react'
 const { useState } = React
 import { Row, Col } from 'antd'
 import NumberAnimation from './components/numberAnimation'
+import LineCharts from './components/lineCharts'
 
 interface Statictics{
   number: number;
@@ -38,7 +39,7 @@ const HomeIndex = () => {
       <Row gutter={40} justify="space-around"  align="middle" className="statistics-wrapper">
         {
           statisticsArray.map(item => (
-            <Col xs={24} sm={24} md={12} lg={12} xl={6}>
+            <Col xs={24} sm={24} md={12} lg={12} xl={6} key={item.icon}>
               <div className="statistics">
                 <div className="statistics-icon flex-center">
                   <svg className="icon" aria-hidden="true">
@@ -53,7 +54,9 @@ const HomeIndex = () => {
             </Col>
           ))
         }
+        <Col span={24} className="test"><LineCharts/></Col>
       </Row>
+      
     </div>
   )
 }
