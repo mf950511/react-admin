@@ -46,6 +46,18 @@ export const useChartEffect = (chartRef: any, option: any) => {
       renderEchart(option)
     }, 20)
   }
-  return render
+
+  const resize = () => {
+    setTimeout(() => {
+      renderEchart(option)
+      // 部分条件下dom渲染时常100ms
+      chartInstance && chartInstance.resize()
+    }, 300)
+  }
+
+  return {
+    render,
+    resize
+  }
 }
 

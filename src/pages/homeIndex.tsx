@@ -54,10 +54,8 @@ const HomeIndex = () => {
             </Col>
           ))
         }
-        <Col span={24}>
-          <div className="chartWrapper">
-            <LineCharts/>
-          </div>
+        <Col span={24} className="chartWrapper">
+          <LineCharts/>
         </Col>
       </Row>
       
