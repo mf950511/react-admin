@@ -9,7 +9,7 @@ interface Chart{
   [PropName: string]: any;
 }
 
-export const useChartEffect = (chartRef: any, option: any, otherInfo: Array<any> = []) => {
+export const useChartEffect = (chartRef: any, option: any) => {
   // 基于准备好的dom，初始化echarts实例
   let chartInstance: Chart | null = null
 
@@ -25,10 +25,11 @@ export const useChartEffect = (chartRef: any, option: any, otherInfo: Array<any>
   }
 
   useEffect(() => {
-    renderEchart(option)
-  }, [option, ...otherInfo])
+    render()
+  }, [option])
 
   useEffect(() => {
+    render()
     // 防抖渲染
     const func = debounce(()=>{
       chartInstance && chartInstance.resize()
@@ -39,5 +40,12 @@ export const useChartEffect = (chartRef: any, option: any, otherInfo: Array<any>
       window.removeEventListener('resize', func, false)
     }
   }, [])
+
+  const render = () => {
+    setTimeout(() => {
+      renderEchart(option)
+    }, 20)
+  }
+  return render
 }
 

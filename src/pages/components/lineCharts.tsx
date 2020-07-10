@@ -1,11 +1,12 @@
 import * as React from 'react'
-const { useRef } = React
+const { useRef, useEffect } = React
 import { useChartEffect } from 'pages/effect/chart'
+import { useNormalDispatchEffect } from 'pages/effect/reducer'
 
 const option = {
   grid: {
     left: 60,
-    right: 60
+    right: 30
   },
   xAxis: {
     type: 'category',
@@ -22,7 +23,11 @@ const option = {
 };
 const LineCharts = () => {
   const charts = useRef(null)
-  useChartEffect(charts, option)
+  const [collapsed, setCollapsed] = useNormalDispatchEffect('collapsed')
+  const render = useChartEffect(charts, option)
+  useEffect(() => {
+    render()
+  }, [collapsed])
   return (
     <div className="line-charts" ref={charts}>
 

@@ -4,7 +4,7 @@ import "common/css/index.css"
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import App from './App'
-import rootReducer from 'store/index'
+import rootReducer from './src/store/index'
 export const store = createStore(rootReducer)
 require('common/js/iconfont')
 
