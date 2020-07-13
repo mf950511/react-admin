@@ -17,6 +17,7 @@ import HomeIndex from 'pages/homeIndex'
 import { SideBar, IconObject, RouteInfo } from 'types/home'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { useNormalDispatchEffect } from 'pages/effect/reducer'
+import Events from 'lib/events'
 import { 
   MenuFoldOutlined,
   MenuUnfoldOutlined 
@@ -156,6 +157,11 @@ const Home = () => {
     history.push('/home' + path)
   }
 
+  const collapseMenu = () => {
+    setCollapsed(!collapsed)
+    Events.$emit('home-chart-resize')
+  }
+
   return (
     <Layout className="home-wrapper">
       <Sider className="home-sider" breakpoint="lg" collapsedWidth="0" zeroWidthTriggerStyle={{ display: 'none' }} collapsible={true} onBreakpoint={ (state: boolean) => { setCollapsed(state) } } collapsed={ collapsed } >
@@ -167,7 +173,7 @@ const Home = () => {
       </Sider>
       <Layout>
         <Header className="home-header">
-          <div className="home-operator flex-center" onClick={ () => { setCollapsed(!collapsed) } }>
+          <div className="home-operator flex-center" onClick={ collapseMenu }>
             { collapsed ? <MenuUnfoldOutlined className="home-operator-icon"/> : <MenuFoldOutlined  className="home-operator-icon"/> }
           </div>
           <Breadcrumb>

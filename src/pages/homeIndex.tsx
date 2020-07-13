@@ -1,8 +1,9 @@
 import * as React from 'react'
-const { useState } = React
+const { useEffect } = React
 import { Row, Col } from 'antd'
 import NumberAnimation from './components/numberAnimation'
 import Charts from './components/charts'
+import Events from 'lib/events'
 
 interface Statictics{
   number: number;
@@ -33,6 +34,7 @@ const statisticsArray: Array<Statictics> = [
   }
 ]
 
+// 折线图数据
 const lineChartsOption: any = {
   baseOption: {
     grid: {
@@ -93,7 +95,78 @@ const lineChartsOption: any = {
   }
 };
 
+// 南瓜图数据
+const pieChartsOption: any = {
+  series: [
+    {
+      name: '访问来源',
+      type: 'pie',
+      radius: '55%',
+      roseType: 'angle',
+      data: [
+        { value: 100, name: '视频广告' },     
+        { value: 140, name: '搜索引擎' },
+        { value: 170, name: '联盟广告' },
+        { value: 240, name: '邮件营销' },
+        { value: 260, name: '直接访问' },
+      ]
+    }
+  ]
+}
+
+
+// 雷达图数据
+const radarChartsOption: any = {
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    left: 'center',
+    top: 20
+  },
+  radar: [
+    {
+      indicator: [
+        { text: '外观', max: 100 },
+        { text: '拍照', max: 100 },
+        { text: '系统', max: 100 },
+        { text: '性能', max: 100 },
+        { text: '屏幕', max: 100 },
+      ],
+      radius: 120,
+      center: ['50%', '60%']
+    }
+  ],
+  series: [
+    {
+      type: 'radar',
+      radarIndex: 0,
+      areaStyle: {},
+      data: [
+        {
+          value: [85, 90, 90, 95, 95],
+          name: '三星'
+        },
+        {
+          value: [95, 80, 95, 90, 93],
+          name: '苹果'
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
 const HomeIndex = () => {
+  useEffect(() => {
+    Events.$on('home-chart-resize', () => {
+      Events.$emit('charts-resize')
+    })
+  }, [])
+
   return (
     <div className="guide">
       <Row gutter={40} justify="space-around"  align="middle" className="statistics-wrapper">
@@ -118,13 +191,13 @@ const HomeIndex = () => {
           <Charts option={lineChartsOption} className="line-charts"/>
         </Col>
         <Col span={8}>
-          <Charts option={lineChartsOption} className="line-charts"/>
+          <Charts option={pieChartsOption} className="line-charts"/>
         </Col>
         <Col span={8}>
-          <Charts option={lineChartsOption} className="line-charts"/>
+          <Charts option={radarChartsOption} className="line-charts"/>
         </Col>
         <Col span={8}>
-          <Charts option={lineChartsOption} className="line-charts"/>
+          <Charts option={radarChartsOption} className="line-charts"/>
         </Col>
       </Row>
       
