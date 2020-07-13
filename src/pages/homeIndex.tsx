@@ -1,6 +1,6 @@
 import * as React from 'react'
 const { useEffect } = React
-import { Row, Col } from 'antd'
+import { Row, Col, Table, Tag, List } from 'antd'
 import NumberAnimation from './components/numberAnimation'
 import Charts from './components/charts'
 import Events from 'lib/events'
@@ -97,6 +97,11 @@ const lineChartsOption: any = {
 
 // 南瓜图数据
 const pieChartsOption: any = {
+  legend: {
+    data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+    left: 'center',
+    top: 20
+  },
   series: [
     {
       name: '访问来源',
@@ -156,6 +161,7 @@ const radarChartsOption: any = {
   ]
 }
 
+// 柱状图数据
 const stackBar = {
   tooltip: {
     trigger: 'axis',
@@ -164,7 +170,9 @@ const stackBar = {
     }
   },
   legend: {
-    data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+    data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+    left: 'center',
+    top: 20
   },
   grid: {
     left: '3%',
@@ -232,8 +240,69 @@ const stackBar = {
     }
   ]
 }
+{/* <Tag color="green">green</Tag> */}
+// 表单渲染项
+const tableColumns = [
+  { title: '订单号', dataIndex: 'order_no', key: 'order_no' },
+  { title: '价格', dataIndex: 'price', key: 'price' },
+  { 
+    title: '状态', 
+    dataIndex: 'status', 
+    key: 'status',
+    render: (status: string) => (
+      <>
+        { status === 'success' ? <Tag color="green">success</Tag> : <Tag color="volcano">fail</Tag>}
+      </>
+      
+    )
+  },
+]
 
-
+// 表单值
+const tableData = [
+  {
+    key: '1',
+    order_no: '9EAaDdA4-De8c-2b05-3ef5-4bDD13',
+    price: '$223.00',
+    status: 'success'
+  },
+  {
+    key: '2',
+    order_no: '9EAaDdA4-De8c-2b05-3ef5-4bDD13',
+    price: '$423.00',
+    status: 'fail'
+  },
+  {
+    key: '3',
+    order_no: '9EAaDdA4-De8c-2b05-3ef5-4bDD13',
+    price: '$549.00',
+    status: 'success'
+  },
+  {
+    key: '4',
+    order_no: '9EAaDdA4-De8c-2b05-3ef5-4bDD13',
+    price: '$664.00',
+    status: 'success'
+  },
+  {
+    key: '5',
+    order_no: '9EAaDdA4-De8c-2b05-3ef5-4bDD13',
+    price: '$330.00',
+    status: 'fail'
+  },
+  {
+    key: '6',
+    order_no: '9EAaDdA4-De8c-2b05-3ef5-4bDD13',
+    price: '$110.00',
+    status: 'success'
+  },
+  {
+    key: '7',
+    order_no: '9EAaDdA4-De8c-2b05-3ef5-4bDD13',
+    price: '$159.00',
+    status: 'fail'
+  }
+]
 
 
 
@@ -267,14 +336,23 @@ const HomeIndex = () => {
         <Col span={24}>
           <Charts option={lineChartsOption} className="line-charts"/>
         </Col>
-        <Col span={8}>
+        <Col sm={24} md={24} lg={24} xl={8}>
           <Charts option={pieChartsOption} className="line-charts"/>
         </Col>
-        <Col span={8}>
+        <Col sm={24} md={24} lg={24} xl={8}>
           <Charts option={radarChartsOption} className="line-charts"/>
         </Col>
-        <Col span={8}>
+        <Col sm={24} md={24} lg={24} xl={8}>
           <Charts option={stackBar} className="line-charts"/>
+        </Col>
+        <Col lg={24} xl={12}>
+          <Table columns={tableColumns} dataSource={tableData} pagination={false}/>
+        </Col>
+        <Col lg={12} xl={6}>
+          {/* <List/> */}占位符
+        </Col>
+        <Col lg={12} xl={6}>
+        占位符
         </Col>
       </Row>
       
