@@ -70,6 +70,10 @@
     }
   }
 
+  .marginBot{
+    margin-bottom: 40px;
+  }
+
   .chartWrapper{
     position: relative;
     margin-bottom: 40px;
@@ -86,11 +90,13 @@
   }
 
   .todo-list{
+    background: #fff;
+    position: relative;
+    z-index: 1;
     .main{
       border-top: 1px solid @border-color;
       .list-wrapper{
         padding: 10px 0;
-        background: #fff;
         display: flex;
         align-items: center;
         padding-left: 15px;
@@ -106,6 +112,26 @@
           text-decoration: line-through;
         }
       }
+    }
+  }
+
+  .todo-footer{
+    padding: 0 12px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    &::before{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 40px;
+      content: '';
+      overflow: hidden;
+      box-sizing: inherit;
+      box-shadow: 0 1px 1px rgba(0,0,0,.2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0,0,0,.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0,0,0,.2);
     }
   }
 }

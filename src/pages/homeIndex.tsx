@@ -1,10 +1,11 @@
 import * as React from 'react'
 const { useEffect } = React
-import { Row, Col, Table, Tag } from 'antd'
+import { Row, Col, Table, Tag, Card, Progress } from 'antd'
 import NumberAnimation from './components/numberAnimation'
 import Charts from './components/charts'
 import Events from 'lib/events'
 import List from './components/list'
+
 
 interface Statictics{
   number: number;
@@ -305,22 +306,28 @@ const tableData = [
   }
 ]
 
-const listData = [
+const chartList = [
+  pieChartsOption,
+  radarChartsOption,
+  stackBar
+]
+
+const technicalList = [
   {
-    checked: false,
-    title: '啊啊啊啊'
+    name: 'React',
+    value: 70
   },
   {
-    checked: false,
-    title: '啊啊啊啊'
+    name: 'Javascript',
+    value: 18
   },
   {
-    checked: false,
-    title: '啊啊啊啊'
+    name: 'Css',
+    value: 12
   },
   {
-    checked: false,
-    title: '啊啊啊啊'
+    name: 'Typescript',
+    value: 100
   }
 ]
 
@@ -356,23 +363,33 @@ const HomeIndex = () => {
         <Col span={24}>
           <Charts option={lineChartsOption} className="line-charts"/>
         </Col>
-        <Col sm={24} md={24} lg={24} xl={8}>
-          <Charts option={pieChartsOption} className="line-charts"/>
-        </Col>
-        <Col sm={24} md={24} lg={24} xl={8}>
-          <Charts option={radarChartsOption} className="line-charts"/>
-        </Col>
-        <Col sm={24} md={24} lg={24} xl={8}>
-          <Charts option={stackBar} className="line-charts"/>
-        </Col>
-        <Col lg={24} xl={12}>
+        {
+          chartList.map((item, index) => (
+            <Col sm={24} md={24} lg={24} xl={8} key={ index }>
+              <Charts option={item} className="line-charts"/>
+            </Col>
+          ))
+        }
+        <Col lg={24} xl={12} className="marginBot">
           <Table columns={tableColumns} dataSource={tableData} pagination={false}/>
         </Col>
-        <Col lg={12} xl={6}>
+        <Col lg={12} xl={6} className="marginBot">
           <List/>
         </Col>
-        <Col lg={12} xl={6}>
-        占位符
+        <Col lg={12} xl={6} className="marginBot">
+          <Card
+            hoverable
+            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+          >
+            {
+              technicalList.map(item => (
+                <div className="progress" key={ item.name }>
+                  <div className="title">{ item.name }</div>
+                  <Progress percent={ item.value }/>
+                </div>
+              ))
+            }
+          </Card>
         </Col>
       </Row>
       
