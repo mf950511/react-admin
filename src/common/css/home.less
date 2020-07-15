@@ -84,4 +84,28 @@
     bottom: 0;
     background: #fff;
   }
+
+  .todo-list{
+    .main{
+      border-top: 1px solid @border-color;
+      .list-wrapper{
+        padding: 10px 0;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        border-bottom: 1px solid @border-color;
+      }
+      .list{
+        font-size: 14px;
+        color: #4d4d4d;
+        font-weight: 500;
+        transition: color 0.4s;
+        &.delete-line{
+          color: #d9d9d9;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
 }

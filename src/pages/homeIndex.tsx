@@ -1,9 +1,10 @@
 import * as React from 'react'
 const { useEffect } = React
-import { Row, Col, Table, Tag, List } from 'antd'
+import { Row, Col, Table, Tag } from 'antd'
 import NumberAnimation from './components/numberAnimation'
 import Charts from './components/charts'
 import Events from 'lib/events'
+import List from './components/list'
 
 interface Statictics{
   number: number;
@@ -304,6 +305,25 @@ const tableData = [
   }
 ]
 
+const listData = [
+  {
+    checked: false,
+    title: '啊啊啊啊'
+  },
+  {
+    checked: false,
+    title: '啊啊啊啊'
+  },
+  {
+    checked: false,
+    title: '啊啊啊啊'
+  },
+  {
+    checked: false,
+    title: '啊啊啊啊'
+  }
+]
+
 
 
 const HomeIndex = () => {
@@ -315,7 +335,7 @@ const HomeIndex = () => {
 
   return (
     <div className="guide">
-      <Row gutter={40} justify="space-around"  align="middle" className="statistics-wrapper">
+      <Row gutter={40} justify="space-around"  align="top" className="statistics-wrapper">
         {
           statisticsArray.map(item => (
             <Col xs={24} sm={24} md={12} lg={12} xl={6} key={item.icon}>
@@ -349,7 +369,7 @@ const HomeIndex = () => {
           <Table columns={tableColumns} dataSource={tableData} pagination={false}/>
         </Col>
         <Col lg={12} xl={6}>
-          {/* <List/> */}占位符
+          <List/>
         </Col>
         <Col lg={12} xl={6}>
         占位符

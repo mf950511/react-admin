@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 10:56:43
- * @LastEditTime: 2020-07-09 15:53:09
+ * @LastEditTime: 2020-07-14 11:44:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\src\api\request.js
@@ -29,11 +29,12 @@ axios.interceptors.response.use(function (response: any) {
   console.log('响应请求成功', response)
   const res = response.data
   if(response.status !== 200 || res.code !== 0) {
-    message.error(res.message)
+    message.error(res.msg)
   } else {
     return res
   }
 }, function (error: any) {
+  console.log('请求失败', error.response)
   if (error === undefined || error.code === 'ECONNABORTED') {
     message.warning('服务请求超时')
     return Promise.reject(error)
