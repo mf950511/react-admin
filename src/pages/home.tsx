@@ -14,7 +14,7 @@ import HomeIndex from 'pages/homeIndex'
 import LeftMenu from './components/menu'
 import BreadCrumb from './components/breadCrumb'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import { useNormalDispatchEffect } from 'pages/effect/reducer'
+import { useNormalDispatchEffect } from 'store/normal/effect'
 import Events from 'lib/events'
 import DropDown from './components/dropDown'
 import { 
