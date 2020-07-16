@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-07-08 11:50:26
- * @LastEditTime: 2020-07-08 12:22:11
+ * @LastEditTime: 2020-07-16 10:52:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\readme.md
@@ -38,4 +38,6 @@ npm run check
 - [从零构建一个react-hooks的后台管理系统(1) -- 项目配置](https://juejin.im/post/5ee89628e51d457863404468)
 - [从零构建一个react-hooks的后台管理系统(2) -- 项目配置](https://juejin.im/post/5ef05c61e51d45740e4275f2)
 - [从零构建一个react-hooks的后台管理系统(3) -- 项目配置](https://juejin.im/post/5f02c4c3e51d4534bf67ba47)
+- [react hooks 下使用redux](https://juejin.im/post/5f0d80d65188252e884e8228)
+- [react hooks下封装通用redux](https://juejin.im/post/5f0d95e66fb9a07eb90cbdd8)
 
