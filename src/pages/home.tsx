@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Dropdown } from 'antd'
 const { Header, Sider, Content } = Layout
 const { SubMenu } = Menu
 const { useState, useEffect } = React
@@ -18,6 +18,7 @@ import { SideBar, IconObject, RouteInfo } from 'types/home'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { useNormalDispatchEffect } from 'pages/effect/reducer'
 import Events from 'lib/events'
+import { post } from 'api/request'
 import { 
   MenuFoldOutlined,
   MenuUnfoldOutlined 
@@ -110,6 +111,7 @@ const getRouteInfo = (routes: SideBar[], otherInfo: RouteInfo, baseInfo: string)
   return otherInfo
 }
 
+
 const Home = () => {
   const [inProp, setInProp] = useState(false);
   // 路由栈初始值
@@ -157,10 +159,42 @@ const Home = () => {
     history.push('/home' + path)
   }
 
+  // 切换菜单收起状态
   const collapseMenu = () => {
     setCollapsed(!collapsed)
     Events.$emit('home-chart-resize')
   }
+
+  // 选择右侧下拉框操作
+  const selectDrop = (e: any) => {
+    const { key } = e
+    switch(key) {
+      case 'logout':
+        post('/api/user/logout').then(res => {
+          history.push('/login')
+        })
+        return
+      default:
+        history.push(key)
+    }
+  }
+
+  
+  // 右上角下拉框
+  const dropdownMenu = (
+    <Menu onClick={ selectDrop }>
+      <Menu.Item key="/home">
+        首页
+      </Menu.Item>
+      <Menu.Item key="/login">
+        个人中心
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="logout">
+        退出登录
+      </Menu.Item>
+    </Menu>
+  )
 
   return (
     <Layout className="home-wrapper">
@@ -185,6 +219,11 @@ const Home = () => {
               ))
             }
           </Breadcrumb>
+          <div className="dropdown">
+            <Dropdown overlay={dropdownMenu} placement="bottomLeft" arrow>
+              <span>哈哈哈</span>
+            </Dropdown>
+          </div>
         </Header>
         <Content className="home-content">
           <Router>
