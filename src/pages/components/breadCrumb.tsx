@@ -57,7 +57,7 @@ const BreadCrumb = () => {
   }, [menuInfo])
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className="home-bread">
       {
         currentRoute.map((item) => (
           <Breadcrumb.Item key={ item }>

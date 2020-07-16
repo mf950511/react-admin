@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Layout, Menu, Dropdown } from 'antd'
+import { Layout } from 'antd'
 const { Header, Sider, Content } = Layout
 const { useState } = React
 import '@/common/css/home.less'
-import { Route, Redirect, useHistory,HashRouter as Router, Switch as RouterSwitch, useLocation } from 'react-router-dom'
+import { Route, Redirect, HashRouter as Router, Switch as RouterSwitch, useLocation } from 'react-router-dom'
 import Doc from 'pages/doc'
 import Guide from 'pages/guide'
 import PageAuthority from 'pages/pageAuthority'
@@ -16,7 +16,7 @@ import BreadCrumb from './components/breadCrumb'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { useNormalDispatchEffect } from 'pages/effect/reducer'
 import Events from 'lib/events'
-import { post } from 'api/request'
+import DropDown from './components/dropDown'
 import { 
   MenuFoldOutlined,
   MenuUnfoldOutlined 
@@ -26,7 +26,6 @@ import {
 const Home = () => {
   const [inProp, setInProp] = useState(false);
   const location = useLocation()
-  const history = useHistory()
   // 切换侧边栏收起状态
   const [collapsed, setCollapsed] = useNormalDispatchEffect('collapsed')
 
@@ -37,36 +36,6 @@ const Home = () => {
     Events.$emit('home-chart-resize')
   }
 
-  // 选择右侧下拉框操作
-  const selectDrop = (e: any) => {
-    const { key } = e
-    switch(key) {
-      case 'logout':
-        post('/api/user/logout').then(res => {
-          history.push('/login')
-        })
-        return
-      default:
-        history.push(key)
-    }
-  }
-
-  
-  // 右上角下拉框
-  const dropdownMenu = (
-    <Menu onClick={ selectDrop }>
-      <Menu.Item key="/home">
-        首页
-      </Menu.Item>
-      <Menu.Item key="/login">
-        个人中心
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="logout">
-        退出登录
-      </Menu.Item>
-    </Menu>
-  )
 
   return (
     <Layout className="home-wrapper">
@@ -79,11 +48,7 @@ const Home = () => {
             { collapsed ? <MenuUnfoldOutlined className="home-operator-icon"/> : <MenuFoldOutlined  className="home-operator-icon"/> }
           </div>
           <BreadCrumb/>
-          <div className="dropdown">
-            <Dropdown overlay={dropdownMenu} placement="bottomLeft" arrow>
-              <span>哈哈哈</span>
-            </Dropdown>
-          </div>
+          <DropDown/>
         </Header>
         <Content className="home-content">
           <Router>
