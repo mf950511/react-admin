@@ -4,8 +4,7 @@ const { useEffect, useState } = React
 import { Breadcrumb } from 'antd'
 import { RouteInfo } from 'types/home'
 import { SideBar } from 'store/menu/types'
-import { AppState } from 'store/index'
-import { useSelector } from 'react-redux'
+import { useMenuDispatch } from 'store/menu/effect'
 
 
 const BreadCrumb = () => {
@@ -18,8 +17,7 @@ const BreadCrumb = () => {
   const [currentRoute, setCurrentRoute] = useState([])
 
   // redux菜单栏
-  let menuFunc: (state: AppState) => SideBar[] = (state) => state.menuReducer
-  const menuInfo = useSelector(menuFunc)
+  const [menuInfo] = useMenuDispatch()
 
   // 获取当前路由信息
   const getCurrentLocation = () => {

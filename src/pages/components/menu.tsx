@@ -6,9 +6,7 @@ const { SubMenu } = Menu
 import { SideBar } from 'store/menu/types'
 import * as Icons from '@ant-design/icons';
 import { IconObject } from 'types/home'
-import { AppState } from 'store/index'
-import { setMenu } from 'store/menu/actions'
-import { useSelector, useDispatch } from 'react-redux'
+import { useMenuDispatch } from 'store/menu/effect'
 
 const menu = [
   {
@@ -91,12 +89,10 @@ const LeftMenu = () => {
   const [activeMenu, setActiveMenu] = useState(initActiveMenu)
 
   // redux菜单栏
-  let menuFunc: (state: AppState) => SideBar[] = (state) => state.menuReducer
-  const dispatch = useDispatch()
-  const menuInfo = useSelector(menuFunc)
+  const [menuInfo, setMenuInfo] = useMenuDispatch()
 
   useEffect(() => {
-    dispatch(setMenu(menu))
+    setMenuInfo(menu)
   }, [])
 
   // 获取当前路由信息
