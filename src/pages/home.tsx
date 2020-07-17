@@ -4,19 +4,13 @@ const { Header, Sider, Content } = Layout
 const { useState } = React
 import '@/common/css/home.less'
 import { Route, Redirect, HashRouter as Router, Switch as RouterSwitch, useLocation } from 'react-router-dom'
-import Doc from 'pages/doc'
-import Guide from 'pages/guide'
-import PageAuthority from 'pages/pageAuthority'
-import UserAuthority from 'pages/userAuthority'
-import RouterTest1 from 'pages/routerTest'
-import RouterTest2 from 'pages/routerTest2'
-import HomeIndex from 'pages/homeIndex'
 import LeftMenu from './components/menu'
 import BreadCrumb from './components/breadCrumb'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { normalDispatchEffect } from 'store/normal/effect'
 import Events from 'lib/events'
 import DropDown from './components/dropDown'
+import { homeRouter } from 'router/routeConfig'
 import { 
   MenuFoldOutlined,
   MenuUnfoldOutlined 
@@ -60,16 +54,13 @@ const Home = () => {
               timeout={300}
               >
                 <RouterSwitch location={location}>
-                  <Route path="/home/index" component={ HomeIndex }></Route>
-                  <Route path="/home/doc" component={ Doc }></Route>
-                  <Route path="/home/guide" component={ Guide }></Route>
-                  <Route path="/home/authority/pageAuthority" component={ PageAuthority }></Route>
-                  <Route path="/home/authority/characterAuthority" component={ UserAuthority }></Route>
-                  <Route path="/home/authority/child/routerTest1" component={ RouterTest1 }></Route>
-                  <Route path="/home/authority/child/routerTest2" component={ RouterTest2 }></Route>
-                  <Redirect to="/home/authority/child/routerTest1" from="/home/authority/child"></Redirect>
-                  <Redirect to="/home/authority/pageAuthority" from="/home/authority"></Redirect>
-                  <Redirect to="/home/index" from="/home"></Redirect>
+                  {
+                    homeRouter.map((route, i) => (
+                      route.redirect 
+                      ? <Redirect key={route.path || i} to={ route.to } from={ route.from }></Redirect> 
+                      : <Route key={route.path || i} path={ route.path } component={ route.component }></Route>
+                    ))
+                  }
                 </RouterSwitch>
               </CSSTransition>
             </TransitionGroup>
