@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 10:56:43
- * @LastEditTime: 2020-07-14 11:44:22
+ * @LastEditTime: 2020-07-17 11:04:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\src\api\request.js
@@ -10,6 +10,7 @@ import axios from 'axios'
 import { message } from 'antd'
 import { RequestAxios } from './type'
 import { createHashHistory } from 'history'
+import { errorHandle } from './errorHandle'
 const history = createHashHistory()
 
 // 添加请求拦截器
@@ -30,6 +31,8 @@ axios.interceptors.response.use(function (response: any) {
   const res = response.data
   if(response.status !== 200 || res.code !== 0) {
     message.error(res.msg)
+    errorHandle(res)
+    return Promise.reject(res)
   } else {
     return res
   }

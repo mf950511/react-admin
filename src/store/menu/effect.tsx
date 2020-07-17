@@ -6,7 +6,7 @@ import { setMenu } from './actions'
 
 
 
-export const useMenuDispatch: () => [SideBar[], Function] = () => {
+export const menuDispatchEffect: () => [SideBar[], Function] = () => {
   let menuFunc: (state: AppState) => SideBar[] = (state) => state.menuReducer
   const dispatch = useDispatch()
   const menuInfo = useSelector(menuFunc)

@@ -6,7 +6,7 @@ const { SubMenu } = Menu
 import { SideBar } from 'store/menu/types'
 import * as Icons from '@ant-design/icons';
 import { IconObject } from 'types/home'
-import { useMenuDispatch } from 'store/menu/effect'
+import { menuDispatchEffect } from 'store/menu/effect'
 
 const menu = [
   {
@@ -89,7 +89,7 @@ const LeftMenu = () => {
   const [activeMenu, setActiveMenu] = useState(initActiveMenu)
 
   // redux菜单栏
-  const [menuInfo, setMenuInfo] = useMenuDispatch()
+  const [menuInfo, setMenuInfo] = menuDispatchEffect()
 
   useEffect(() => {
     setMenuInfo(menu)

@@ -3,12 +3,14 @@ import { Dropdown, Menu, Avatar } from 'antd'
 import { post } from 'api/request'
 import { useHistory } from 'react-router-dom'
 import { CaretDownOutlined } from '@ant-design/icons'
+import { normalDispatchEffect } from 'store/normal/effect'
 import avator from 'common/image/avator_small.gif'
 
 
 
 const DropDown = () => {
   const history = useHistory()
+  const [sessionId, setSessionId] = normalDispatchEffect('sessionId', '')
 
   // 选择右侧下拉框操作
   const selectDrop = (e: any) => {
@@ -17,6 +19,7 @@ const DropDown = () => {
       case 'logout':
         post('/api/user/logout').then(res => {
           history.push('/login')
+          setSessionId('')
         })
         return
       default:

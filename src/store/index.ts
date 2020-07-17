@@ -16,6 +16,7 @@ import { todosReducer, filterReducer } from './todos/reducer'
 import { Todo } from './todos/types'
 import { menuReducer } from './menu/reducer'
 import { SideBar } from './menu/types'
+import { createStore } from 'redux'
 const rootReducer = combineReducers({
   numberReducer,
   chatReducer,
@@ -34,4 +35,6 @@ export type AppState = {
   menuReducer: SideBar[],
 }
 
-export default rootReducer
+const store = createStore(rootReducer)
+
+export default store

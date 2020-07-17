@@ -4,27 +4,27 @@ import { Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { get, post } from '../api/request'
 import { useHistory } from 'react-router-dom'
+import { normalDispatchEffect } from 'store/normal/effect'
 
 
 console.log(get)
 
 const Login = () => {
   const history = useHistory()
+  const [sessionId, setSessionId] = normalDispatchEffect('sessionId', '')
 
   const onFinish = (values: any) => {
-    console.log(values)
+    console.log('登录', values, sessionId)
     post('/api/user/login', values).then(res => {
       const data = res.data || {}
       const { sessionId } = data
-      localStorage.setItem('sessionId', sessionId)
-      console.log(123213, sessionId)
+      setSessionId(sessionId)
       history.push('/home')
     }, err => {
-      console.log(err)
+      console.log('登录出错了', err)
     })
   }
 
-  console.log(123123, process.env.NODE_ENV)
   return (
     <div className="login-wrapper">
       <Form
