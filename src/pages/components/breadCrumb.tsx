@@ -55,15 +55,18 @@ const BreadCrumb = () => {
   }, [menuInfo])
 
   return (
-    <Breadcrumb className="home-bread">
-      {
-        currentRoute.map((item) => (
-          <Breadcrumb.Item key={ item }>
-            <Link to={ item }>{ routerInfo[item] }</Link>
-          </Breadcrumb.Item>
-        ))
-      }
-    </Breadcrumb>
+    <div className="home-bread">
+      <Breadcrumb className="home-bread-list">
+        {
+          currentRoute.map((item) => (
+            <Breadcrumb.Item key={ item }>
+              <Link to={ item }>{ routerInfo[item] }</Link>
+            </Breadcrumb.Item>
+          ))
+        }
+      </Breadcrumb>
+    </div>
+    
   )
 
 }
