@@ -17,7 +17,7 @@ const DropDown = () => {
     const { key } = e
     switch(key) {
       case 'logout':
-        post('/api/user/logout').then(res => {
+        post('/user/logout').then(res => {
           history.push('/login')
           setSessionId('')
         })

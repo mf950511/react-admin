@@ -5,6 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { get, post } from '../api/request'
 import { useHistory } from 'react-router-dom'
 import { normalDispatchEffect } from 'store/normal/effect'
+import { menuDispatchEffect } from 'store/menu/effect'
 
 
 console.log(get)
@@ -12,13 +13,15 @@ console.log(get)
 const Login = () => {
   const history = useHistory()
   const [sessionId, setSessionId] = normalDispatchEffect('sessionId', '')
+  // redux菜单栏
+  const [menuInfo, setMenuInfo] = menuDispatchEffect()
 
   const onFinish = (values: any) => {
-    console.log('登录', values, sessionId)
-    post('/api/user/login', values).then(res => {
+    post('/user/login', values).then(res => {
       const data = res.data || {}
-      const { sessionId } = data
+      const { sessionId, menu } = data
       setSessionId(sessionId)
+      setMenuInfo(menu)
       history.push('/home')
     }, err => {
       console.log('登录出错了', err)

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-01 10:56:43
- * @LastEditTime: 2020-07-17 11:04:02
+ * @LastEditTime: 2020-07-24 11:37:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\src\api\request.js
@@ -17,9 +17,7 @@ const history = createHashHistory()
 axios.interceptors.request.use(function (config: RequestAxios) {
   // 在发送请求之前做些什么
   const { url = '' } = config
-  if(!/^\/api\/user\//.test(url)) {
-    history.push('/login')
-  }
+  config.url = url ? '/api' + url : ''
   return config;
 }, function (error: any) {
   // 对请求错误做些什么

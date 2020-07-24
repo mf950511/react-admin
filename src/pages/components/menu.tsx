@@ -7,56 +7,8 @@ import { SideBar } from 'store/menu/types'
 import * as Icons from '@ant-design/icons';
 import { IconObject } from 'types/home'
 import { menuDispatchEffect } from 'store/menu/effect'
+import { post } from 'api/request'
 
-const menu = [
-  {
-    breadcrumbName: '首页',
-    icon: 'BankOutlined',
-    path: '/index',
-  },
-  {
-    breadcrumbName: '文档',
-    icon: 'FileTextOutlined',
-    path: '/doc',
-  },
-  {
-    breadcrumbName: '引导页',
-    icon: 'SendOutlined',
-    path: '/guide',
-  },
-  {
-    breadcrumbName: '权限测试页',
-    icon: 'PropertySafetyOutlined',
-    path: '/authority',
-    children: [
-      {
-        breadcrumbName: '页面权限',
-        path: '/pageAuthority',
-      },
-      {
-        breadcrumbName: '角色权限',
-        path: '/characterAuthority',
-        icon: 'SendOutlined',
-      },
-      {
-        breadcrumbName: '子路由',
-        path: '/child',
-        children: [
-          {
-            breadcrumbName: "路由1",
-            path: '/routerTest1',
-            icon: 'SendOutlined',
-          },
-          {
-            breadcrumbName: '路由2',
-            path: '/routerTest2',
-            icon: 'SendOutlined',
-          }
-        ]
-      }
-    ]
-  }
-]
 
 // 渲染左侧菜单
 const sideBarTree = (menuArr: SideBar[]) => {
@@ -91,8 +43,20 @@ const LeftMenu = () => {
   // redux菜单栏
   const [menuInfo, setMenuInfo] = menuDispatchEffect()
 
-  useEffect(() => {
+  // 菜单为空则进行请求
+  const getMenu = async () => {
+    const menu = await post('/user/menu').then(res => {
+      const data = res.data || {}
+      const { menu = [] } = data
+      return menu
+    })
     setMenuInfo(menu)
+  }
+
+  useEffect(() => {
+    if(menuInfo && !menuInfo.length) {
+      getMenu()
+    }
   }, [])
 
   // 获取当前路由信息
