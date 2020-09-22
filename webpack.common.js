@@ -2,6 +2,21 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const threadLoader = require('thread-loader');
+const jsWorkerPool = {
+  // options
+  
+  // 产生的 worker 的数量，默认是 (cpu 核心数 - 1)
+  // 当 require('os').cpus() 是 undefined 时，则为 1
+  workers: 2,
+  
+  // 闲置时定时删除 worker 进程
+  // 默认为 500ms
+  // 可以设置为无穷大， 这样在监视模式(--watch)下可以保持 worker 持续存在
+  poolTimeout: 2000
+};
+threadLoader.warmup(jsWorkerPool, ['babel-loader']);
+
 const devMode = process.env.NODE_ENV !== 'production'
 console.log(devMode, process.env.NODE_ENV)
 // 用于worker缓存，处理网络链接错误
@@ -68,7 +83,13 @@ module.exports = {
       },
       {
         test: /\.(ts|js)x?$/,
-        use: ['babel-loader'],
+        use: [
+          {
+            loader: 'thread-loader',
+            options: jsWorkerPool
+          },
+          'babel-loader'
+        ],
         exclude: /node-modules/
       }
     ]

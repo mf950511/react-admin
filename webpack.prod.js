@@ -14,9 +14,11 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-module.exports = merge(common, {
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+module.exports = smp.wrap(merge(common, {
   mode: "production",
-  devtool: 'source-map',
+  devtool: 'none',
   output: {
     filename: '[name].[chunkhash].js', // [chunkhash]用于生成hash值，避免缓存
     path: path.resolve(__dirname, 'dist'),
@@ -84,4 +86,4 @@ module.exports = merge(common, {
       new OptimizeCssAssetsPlugin({})
     ]
   }
-})
+}))
