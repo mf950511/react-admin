@@ -24,6 +24,7 @@ cd react-admin
 // 安装依赖
 npm install
 
+
 // 进入开发模式
 npm run dev
 
@@ -35,9 +36,11 @@ npm run check
 
 ## 相关开发文档
 
-- [从零构建一个react-hooks的后台管理系统(1) -- 项目配置](https://juejin.im/post/5ee89628e51d457863404468)
-- [从零构建一个react-hooks的后台管理系统(2) -- 项目配置](https://juejin.im/post/5ef05c61e51d45740e4275f2)
-- [从零构建一个react-hooks的后台管理系统(3) -- 项目配置](https://juejin.im/post/5f02c4c3e51d4534bf67ba47)
+- [从零构建一个react-hooks的后台管理系统(1) -- 项目配置](http://47.104.71.163/blog/react_md_1/)
+- [从零构建一个react-hooks的后台管理系统(2) -- 项目配置](http://47.104.71.163/blog/react_md_2/)
+- [从零构建一个react-hooks的后台管理系统(3) -- 项目配置](http://47.104.71.163/blog/react_md_3/)
+- [从零构建一个react-hooks的后台管理系统(4) -- 项目问题修复](http://47.104.71.163/blog/react_md_4/)
+- [从零构建一个react-hooks的后台管理系统(5) -- webpack打包优化](http://47.104.71.163/blog/react_md_5/)
 - [react hooks 下使用redux](https://juejin.im/post/5f0d80d65188252e884e8228)
 - [react hooks下封装通用redux](https://juejin.im/post/5f0d95e66fb9a07eb90cbdd8)
 
