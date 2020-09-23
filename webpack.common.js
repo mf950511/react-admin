@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const threadLoader = require('thread-loader');
 const jsWorkerPool = {
   // options
@@ -127,15 +128,28 @@ module.exports = {
     new MiniCssExtractPlugin({// 将css打包成单独的css文件
       filename: devMode ? '[name].css' : '[name].[hash:5].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash:5].css'
-    })
+    }),
+    new HardSourceWebpackPlugin(),
     // new WorkboxPlugin.GenerateSW({ // 静态服务，用于支持worker的浏览器在服务挂了之后继续访问
     //   clientsClaim: true,
     //   skipWaiting: true
     // })
   ],
   optimization: { // 公共代码抽离
+    runtimeChunk: 'single',
     splitChunks:{ //启动代码分割，有默认配置项
-      chunks: 'all'
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return `npm.${packageName.replace('@', '')}`;
+          },
+        },
+      },
     }
   }
 }
