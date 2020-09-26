@@ -1,14 +1,15 @@
-import Doc from 'pages/doc'
-import Guide from 'pages/guide'
-import PageAuthority from 'pages/pageAuthority'
-import UserAuthority from 'pages/userAuthority'
-import RouterTest1 from 'pages/routerTest'
-import RouterTest2 from 'pages/routerTest2'
-import HomeIndex from 'pages/homeIndex'
-import Error from 'pages/error'
-import Home from 'pages/home'
-import Login from 'pages/login'
-import Test from 'pages/test2'
+import { lazy } from 'react'
+const Doc = lazy(() => import('pages/doc'))
+const Guide = lazy(() => import('pages/guide'))
+const PageAuthority = lazy(() => import('pages/pageAuthority'))
+const UserAuthority = lazy(() => import('pages/userAuthority'))
+const RouterTest1 = lazy(() => import('pages/routerTest'))
+const RouterTest2 = lazy(() => import('pages/routerTest2'))
+const HomeIndex = lazy(() => import('pages/homeIndex'))
+const Error = lazy(() => import('pages/error'))
+const Home = lazy(() => import('pages/home'))
+const Login = lazy(() => import('pages/login'))
+const Test = lazy(() => import('pages/test2'))
 // 外层主路由
 export const rootRouter = [
   {

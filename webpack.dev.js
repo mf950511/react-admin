@@ -10,15 +10,14 @@ const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 const path = require('path')
 const webpack = require('webpack')
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-const smp = new SpeedMeasurePlugin();
 console.log('development')
 
-module.exports = smp.wrap(merge(common, {
+module.exports = merge(common, {
   mode: 'development',
   output: {
-    filename: '[name].js', // [chunkhash]用于生成hash值，避免缓存
-    path: path.resolve(__dirname, 'dist')
+    filename: '[name].bundle.js', // [chunkhash]用于生成hash值，避免缓存
+    path: path.resolve(__dirname, 'dist'),
+    chunkFilename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -89,4 +88,4 @@ module.exports = smp.wrap(merge(common, {
       aggregateTimeout: 300  // 默认值, 当你连续改动时候, webpack可以设置构建延迟时间(防抖)
     }
   }
-}))
+})

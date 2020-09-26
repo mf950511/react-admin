@@ -129,7 +129,7 @@ module.exports = {
       filename: devMode ? '[name].css' : '[name].[hash:5].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash:5].css'
     }),
-    new HardSourceWebpackPlugin(),
+    new HardSourceWebpackPlugin({}),
     // new WorkboxPlugin.GenerateSW({ // 静态服务，用于支持worker的浏览器在服务挂了之后继续访问
     //   clientsClaim: true,
     //   skipWaiting: true

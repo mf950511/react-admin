@@ -5,6 +5,7 @@
     "@babel/preset-typescript"
   ],
   "plugins": [
+    "syntax-dynamic-import",
     "@babel/proposal-class-properties",
     "@babel/proposal-object-rest-spread",
     ["import", { "libraryName": "antd", "libraryDirectory": "lib", "style": "css"}, "ant"]
