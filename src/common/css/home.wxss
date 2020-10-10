@@ -1,0 +1,184 @@
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+html {
+  line-height: 1.15;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-wrapper {
+  /* 路由动画相关样式 */
+}
+.home-wrapper .home-header {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  padding: 0;
+  height: 85px;
+}
+.home-wrapper .home-header .operator-wrapper {
+  height: 50px;
+  display: flex;
+  align-items: center;
+}
+.home-wrapper .home-header .home-operator {
+  padding: 0 15px;
+  height: 50px;
+}
+.home-wrapper .home-header .home-operator .home-operator-icon {
+  font-size: 20px;
+  color: #000;
+}
+.home-wrapper .home-header .tag-wrapper {
+  height: 35px!important;
+  width: 400px;
+  overflow-x: scroll;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+}
+.home-wrapper .route-enter,
+.home-wrapper .route-appear {
+  opacity: 0;
+  transform: translateX(-200px);
+}
+.home-wrapper .route-enter.route-enter-active,
+.home-wrapper .route-appear.route-appear-active {
+  opacity: 1;
+  transition: all 300ms;
+  transform: translateX(0);
+}
+.home-wrapper .route-exit {
+  opacity: 0;
+}
+.home-wrapper .route-exit.route-exit-active {
+  opacity: 0;
+}
+.home-wrapper .guide {
+  padding: 20px;
+}
+.home-wrapper .guide .guide-tip {
+  padding: 8px 24px;
+  border-radius: 2px;
+  line-height: 32px;
+  font-size: 16px;
+  color: #2c3e50;
+  background: #fff;
+  margin-bottom: 20px;
+}
+.home-wrapper .home-bread {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.home-wrapper .home-dropdown {
+  margin-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.home-wrapper .home-dropdown:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+.home-wrapper .home-dropdown .avator-icon {
+  position: absolute;
+  bottom: 4px;
+  right: -10px;
+  font-size: 12px;
+}
+.home-wrapper .statistics-wrapper .statistics {
+  background: #fff;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  justify-content: space-between;
+}
+.home-wrapper .statistics-wrapper .statistics .statistics-icon {
+  width: 80px;
+  height: 80px;
+}
+.home-wrapper .statistics-wrapper .statistics .statistics-icon .icon {
+  font-size: 60px;
+}
+.home-wrapper .statistics-wrapper .statistics .statistics-show {
+  flex: 1;
+  text-align: right;
+  font-weight: 700;
+  color: #666;
+  font-size: 20px;
+}
+.home-wrapper .statistics-wrapper .statistics .statistics-show .statistics-title {
+  margin-bottom: 8px;
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 16px;
+}
+.home-wrapper .marginBot {
+  margin-bottom: 40px;
+}
+.home-wrapper .chartWrapper {
+  position: relative;
+  margin-bottom: 40px;
+  height: 370px;
+}
+.home-wrapper .line-charts {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+}
+.home-wrapper .todo-list {
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+.home-wrapper .todo-list .main {
+  border-top: 1px solid #e6e6e6;
+}
+.home-wrapper .todo-list .main .list-wrapper {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.home-wrapper .todo-list .main .list {
+  font-size: 14px;
+  color: #4d4d4d;
+  font-weight: 500;
+  transition: color 0.4s;
+}
+.home-wrapper .todo-list .main .list.delete-line {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+.home-wrapper .todo-footer {
+  padding: 0 12px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.home-wrapper .todo-footer::before {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 40px;
+  content: '';
+  overflow: hidden;
+  box-sizing: inherit;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}

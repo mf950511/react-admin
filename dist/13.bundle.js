@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[13],{39:function(e,n,c){"use strict";c.r(n);var t=c(0);n.default=function(){return t.createElement("div",{className:"doc"},"我是文档页")}}}]);
