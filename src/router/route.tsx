@@ -43,4 +43,5 @@ const RouterConfig = () => {
     </Router>
   )
 }
+
 export default RouterConfig
