@@ -10,7 +10,17 @@ const RouterConfig = () => {
   const [sessionId] = normalDispatchEffect('sessionId', '')
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div className="loader">
+        <div className="loader-inner">
+          {
+            [1,2,3,4, 5].map(item => (
+              <div className="loader-line-wrap" key={ item }>
+                <div className="loader-line"></div>
+              </div>
+            ))
+          }
+        </div>
+      </div>}>
         <Switch>
           <Route path="/login" component={ Login }></Route>
           {
