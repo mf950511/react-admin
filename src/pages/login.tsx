@@ -57,6 +57,10 @@ const Login = () => {
             登录
           </Button>
         </Form.Item>
+        <Form.Item>
+          <p className="tip">账号：admin 密码：随便填  管理员权限</p>
+          <p className="tip">账号：editor 密码：随便填  操作员权限</p>
+        </Form.Item>
       </Form>
     </div>
   )
