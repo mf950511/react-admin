@@ -53,7 +53,7 @@ export const rootRouter = [
     path: '/routerTest2'
   },
   {
-    to: '/home',
+    to: '/login',
     from: '/',
     redirect: true,
   }
