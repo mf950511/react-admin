@@ -4,11 +4,22 @@ const { useEffect, useState } = React
 import { Menu } from 'antd'
 const { SubMenu } = Menu
 import { SideBar } from 'store/menu/types'
-import * as Icons from '@ant-design/icons';
 import { IconObject } from 'types/home'
 import { menuDispatchEffect } from 'store/menu/effect'
 import { post } from 'api/request'
+import {
+  BankOutlined,
+  FileTextOutlined,
+  SendOutlined,
+  PropertySafetyOutlined,
+} from '@ant-design/icons';
 
+const Icons = {
+  BankOutlined,
+  FileTextOutlined,
+  SendOutlined,
+  PropertySafetyOutlined
+}
 
 // 渲染左侧菜单
 const sideBarTree = (menuArr: SideBar[]) => {

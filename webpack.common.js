@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const threadLoader = require('thread-loader');
+const webpackBar = require('webpackbar')
 const jsWorkerPool = {
   // options
   
@@ -130,11 +131,18 @@ module.exports = {
       chunkFilename: devMode ? '[id].css' : '[id].[hash:5].css'
     }),
     new HardSourceWebpackPlugin({}),
+    new webpackBar({
+      name: devMode ? '启动中' : '打包中',
+      color: '#3c99b0',
+    })
     // new WorkboxPlugin.GenerateSW({ // 静态服务，用于支持worker的浏览器在服务挂了之后继续访问
     //   clientsClaim: true,
     //   skipWaiting: true
     // })
   ],
+  externals: {
+    echarts: 'echarts'
+  },
   optimization: { // 公共代码抽离
     runtimeChunk: 'single',
     splitChunks:{ //启动代码分割，有默认配置项
