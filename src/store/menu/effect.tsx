@@ -12,7 +12,6 @@ export const menuDispatchEffect: () => [SideBar[], Function] = () => {
   const menuInfo = useSelector(menuFunc)
   // 切换侧边栏收起状态
   const setMenuInfo = (menu: SideBar[]) => { 
-    console.log(333, menu)
     dispatch(setMenu(menu)) 
   }
   return [menuInfo, setMenuInfo]

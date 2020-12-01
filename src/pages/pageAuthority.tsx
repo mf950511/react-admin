@@ -3,6 +3,7 @@ const { useState, useEffect } = React
 import { menuDispatchEffect } from 'store/menu/effect'
 import { Button, Table, Space, Modal, Tree } from 'antd'
 import 'common/css/authority.less'
+import { SideBar } from 'store/menu/types'
 
 interface PageAuthority {
   key: number;
@@ -15,6 +16,7 @@ interface PageAuthority {
 interface UserPageAuthority {
   key: string;
   title: string;
+  children?: UserPageAuthority[];
 }
 
 const dataSource: PageAuthority[] = [
@@ -32,6 +34,50 @@ const dataSource: PageAuthority[] = [
   }
 ]
 
+// 所有路由权限
+const dataTree: UserPageAuthority[] = [
+  {
+    key: '/index',
+    title: '首页'
+  },
+  {
+    key: '/doc',
+    title: '文档'
+  },
+  {
+    key: '/guide',
+    title: '引导页'
+  },
+  {
+    key: '/authority',
+    title: '权限测试页',
+    children: [
+      {
+        key: '/pageAuthority',
+        title: '页面权限'
+      },
+      {
+        key: '/characterAuthority',
+        title: '角色权限'
+      },
+      {
+        key: '/child',
+        title: '子路由',
+        children: [
+          {
+            key: '/routerTest1',
+            title: '路由1',
+          },
+          {
+            key: '/routerTest2',
+            title: '路由2',
+          }
+        ]
+      }
+    ]
+  },
+]
+
 
 const PageAuthority = () => {
   // redux菜单栏
@@ -40,8 +86,16 @@ const PageAuthority = () => {
   const [data, setData] = useState<PageAuthority[]>([])
   // 是否展示权限编辑框
   const [showEdit, setShowEdit] = useState<boolean>(false)
-  // 选中权限数据
+  // 权限列表
   const [treeData, setTreeData] = useState<UserPageAuthority[]>([])
+  // 用户完整权限合集
+  const [checkedKeysAll, setCheckedKeysAll] = useState<string[]>([])// 选中权限数据
+  // 单独用户权限集
+  const [checkedKeys, setCheckedKeys] = useState<string[]>([])
+  // 用户权限数据
+  const [authorityInfo, setAuthorityInfo] = useState(null)
+  // 当前用户信息
+  const [activityRecord, setActivityRecord] = useState<PageAuthority>(null)
   const columns = [
     {
       title: '用户类别',
@@ -72,31 +126,33 @@ const PageAuthority = () => {
   ]
 
   useEffect(() => {
+    setTreeData(dataTree)
     getUserAuthority()
     setData(dataSource)
   }, [])
 
-  // 获取当前用户的权限列表
+  // 获取当前用户的权限列表作为默认列表
   const getUserAuthority = () => {
-    const test = getTest(menuInfo)
-    console.log(test)
+    let nowUserAuthority: string[] = []
+    traverse(menuInfo, nowUserAuthority)
+    setCheckedKeysAll(nowUserAuthority)
   }
 
-  const getTest = (menu, parentKey = '') => {
-    return menu.map((item, key) => {
+  // 遍历生成用户权限表
+  const traverse = (menu: SideBar[], authorityList: string[]) => {
+    menu.map((item, key) => {
+      authorityList.push(item.path)
       if(item.children) {
-        return getTest(item.children, parentKey)
-      } else {
-        return {
-          title: item.breadcrumbName,
-          key: parentKey + '-' + key
-        }
+        traverse(item.children, authorityList)
       }
     })
   }
 
   // 编辑权限操作
   const editModalShow = (record: PageAuthority) => {
+    const authority = authorityInfo && authorityInfo[record.userName] || checkedKeysAll
+    setActivityRecord(record)
+    setCheckedKeys(authority)
     setShowEdit(true)
   }
 
@@ -121,6 +177,7 @@ const PageAuthority = () => {
     setData(newColumn)
   }
 
+  // 新增用户
   const addUser = () => {
     const cloneData = data.slice()
     cloneData.push({
@@ -132,9 +189,20 @@ const PageAuthority = () => {
     setData(cloneData)
   }
 
-  const onCheck = () => {}
-  
-  const checkedKeys = () => {}
+  // 权限选择事件
+  const onCheck = (checkedKeys: string[]) => {
+    setCheckedKeys(checkedKeys)
+  }
+
+  const confirmAuthority = () => {
+    let authority = authorityInfo || {}
+    authority = {
+      ...authority,
+      [activityRecord.userName]: checkedKeys
+    }
+    setAuthorityInfo(authority)
+    setShowEdit(false)
+  }
 
   return (
     <div className="page-authority">
@@ -150,13 +218,16 @@ const PageAuthority = () => {
       title="权限调整"
       centered
       visible={showEdit}
-      onOk={() => setShowEdit(false)}
-      onCancel={() => setShowEdit(false)}
+      cancelText="取消"
+      okText="确认"
+      onOk={() => confirmAuthority() }
+      onCancel={() => setShowEdit(false) }
       width={700}
       >
          <Tree
           checkable
           autoExpandParent={ true }
+          selectable={ false }
           onCheck={ onCheck }
           checkedKeys={ checkedKeys }
           treeData={ treeData }
