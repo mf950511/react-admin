@@ -10,6 +10,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { normalDispatchEffect } from 'store/normal/effect'
 import Events from 'lib/events'
 import DropDown from './components/dropDown'
+import LanguageDropDown from './components/languageDropDown'
 import { homeRouter } from 'router/routeConfig'
 import { 
   MenuFoldOutlined,
@@ -42,6 +43,7 @@ const Home = () => {
             { collapsed ? <MenuUnfoldOutlined className="home-operator-icon"/> : <MenuFoldOutlined  className="home-operator-icon"/> }
           </div>
           <BreadCrumb/>
+          <LanguageDropDown/>
           <DropDown/>
         </Header>
         <Content className="home-content">
