@@ -26,8 +26,8 @@ const DropDown = () => {
   )
 
   return (
-    <Dropdown overlay={dropdownMenu} placement="bottomLeft" arrow>
-      <div className="home-dropdown">
+    <Dropdown overlay={dropdownMenu} placement="bottomRight" arrow>
+      <div className="normal-dropdown language-dropdown">
         <svg className="icon" aria-hidden="true">
           <use xlinkHref="#iconwenzi"></use>
         </svg>

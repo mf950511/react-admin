@@ -6,6 +6,7 @@ import { get, post } from '../api/request'
 import { useHistory } from 'react-router-dom'
 import { normalDispatchEffect } from 'store/normal/effect'
 import { menuDispatchEffect } from 'store/menu/effect'
+import { FormattedMessage } from 'react-intl'
 
 
 console.log(get)
@@ -35,7 +36,11 @@ const Login = () => {
         className="login-form"
         onFinish={onFinish}
       >
-        <h3 className="form-title">系统登录</h3>
+        <FormattedMessage
+        id="formTitle"
+        >
+          {txt => <h3 className="form-title">{ txt }</h3>}
+        </FormattedMessage>
         <Form.Item
           name="username"
           rules={[{ required: true, message: '请输入账号！' }]}
