@@ -5,6 +5,9 @@ import NumberAnimation from './components/numberAnimation'
 import Charts from './components/charts'
 import Events from 'lib/events'
 import List from './components/list'
+import { useIntl } from 'react-intl'
+import { IntlMessage } from 'language/type'
+import { messages } from 'language/intl'
 
 
 interface Statictics{
@@ -17,22 +20,22 @@ const statisticsArray: Array<Statictics> = [
   {
     number: 102400,
     icon: '#iconlianxiren15',
-    title: '访客'
+    title: 'visits'
   },
   {
     number: 81212,
     icon: '#iconxiaoxi',
-    title: '消息'
+    title: 'message'
   },
   {
     number: 9280,
     icon: '#iconqian',
-    title: '收入'
+    title: 'purchase'
   },
   {
     number: 13600,
     icon: '#icongouwuchekong',
-    title: '购物车'
+    title: 'shopping'
   }
 ]
 
@@ -334,6 +337,8 @@ const technicalList = [
 
 
 const HomeIndex = () => {
+  const intl = useIntl()
+  const getIntl = (intlName: IntlMessage) => intl.formatMessage(messages[intlName])
   useEffect(() => {
     Events.$on('home-chart-resize', () => {
       Events.$emit('charts-resize')
@@ -353,7 +358,7 @@ const HomeIndex = () => {
                   </svg>
                 </div>
                 <div className="statistics-show">
-                  <div className="statistics-title">{ item.title }</div>
+                  <div className="statistics-title">{ getIntl(item.title as IntlMessage) }</div>
                   <NumberAnimation number={ item.number } duration={1000} className='statistics-number'/>
                 </div>
               </div>

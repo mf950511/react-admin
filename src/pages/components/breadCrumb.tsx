@@ -5,6 +5,9 @@ import { Breadcrumb } from 'antd'
 import { RouteInfo } from 'types/home'
 import { SideBar } from 'store/menu/types'
 import { menuDispatchEffect } from 'store/menu/effect'
+import { useIntl, FormattedMessage } from 'react-intl'
+import { IntlMessage } from 'language/type'
+import { messages } from 'language/intl'
 
 
 const BreadCrumb = () => {
@@ -18,6 +21,9 @@ const BreadCrumb = () => {
 
   // redux菜单栏
   const [menuInfo] = menuDispatchEffect()
+  // 国际语言切换
+  const intl = useIntl()
+  const getIntl = (intlName: IntlMessage) => intlName && intl.formatMessage(messages[intlName])
 
   // 获取当前路由信息
   const getCurrentLocation = () => {
@@ -26,6 +32,7 @@ const BreadCrumb = () => {
       const url = `/${ pathArr.slice(0, index + 1).join('/') }`
       return url
     })
+    console.log(4444, currentPatharr)
     setCurrentRoute(currentPatharr)
   }
 
@@ -60,7 +67,7 @@ const BreadCrumb = () => {
         {
           currentRoute.map((item) => (
             <Breadcrumb.Item key={ item }>
-              <Link to={ item }>{ routerInfo[item] }</Link>
+              <Link to={ item }>{ getIntl(routerInfo[item] as IntlMessage) }</Link>
             </Breadcrumb.Item>
           ))
         }

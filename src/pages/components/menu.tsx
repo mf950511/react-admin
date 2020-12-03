@@ -7,6 +7,9 @@ import { SideBar } from 'store/menu/types'
 import { IconObject } from 'types/home'
 import { menuDispatchEffect } from 'store/menu/effect'
 import { post } from 'api/request'
+import { useIntl } from 'react-intl'
+import { IntlMessage } from 'language/type'
+import { messages } from 'language/intl'
 import {
   BankOutlined,
   FileTextOutlined,
@@ -22,15 +25,15 @@ const Icons = {
 }
 
 // 渲染左侧菜单
-const sideBarTree = (menuArr: SideBar[]) => {
+const sideBarTree = (menuArr: SideBar[], getIntl: Function) => {
   if(menuArr && menuArr.length) {
     return menuArr.map((item, index) => {
       return (
         item.children 
         ? 
-        <SubMenu className="home-menu" popupClassName="home-sider" key={ item.path } icon={ item.icon ? getIcons(item.icon, Icons) : '' } title={ item.breadcrumbName }>
-          { sideBarTree(item.children) }
-        </SubMenu> : <Menu.Item className="home-menu-item" icon={ item.icon ? getIcons(item.icon, Icons) : '' } key={ item.path }>{ item.breadcrumbName }</Menu.Item>
+        <SubMenu className="home-menu" popupClassName="home-sider" key={ item.path } icon={ item.icon ? getIcons(item.icon, Icons) : '' } title={ getIntl(item.breadcrumbName) }>
+          { sideBarTree(item.children, getIntl) }
+        </SubMenu> : <Menu.Item className="home-menu-item" icon={ item.icon ? getIcons(item.icon, Icons) : '' } key={ item.path }>{ getIntl(item.breadcrumbName) }</Menu.Item>
       )
     })
   } else {
@@ -47,6 +50,8 @@ const getIcons = (str: string, Icons: IconObject) => {
 const LeftMenu = () => {
   const location = useLocation()
   const history = useHistory()
+  const intl = useIntl()
+  const getIntl = (intlName: IntlMessage) => intl.formatMessage(messages[intlName])
   // 选中菜单状态
   const initActiveMenu: Array<string> = ['/home']
   const [activeMenu, setActiveMenu] = useState(initActiveMenu)
@@ -92,7 +97,7 @@ const LeftMenu = () => {
   return (
     <Menu theme="dark" mode="inline" selectedKeys={activeMenu} onClick={ clickMenu } className="home-menu">
       {
-        sideBarTree(menuInfo)
+        sideBarTree(menuInfo, getIntl)
       }
     </Menu>
   )

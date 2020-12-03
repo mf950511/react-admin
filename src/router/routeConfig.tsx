@@ -5,6 +5,11 @@ const PageAuthority = lazy(() => import('pages/pageAuthority'))
 const UserAuthority = lazy(() => import('pages/userAuthority'))
 const RouterTest1 = lazy(() => import('pages/routerTest'))
 const RouterTest2 = lazy(() => import('pages/routerTest2'))
+const RouterTest11 = lazy(() => import('pages/routerTest11'))
+const RouterTest12 = lazy(() => import('pages/routerTest12'))
+const RouterTest13 = lazy(() => import('pages/routerTest13'))
+const RouterTest121 = lazy(() => import('pages/routerTest121'))
+const RouterTest122 = lazy(() => import('pages/routerTest122'))
 const HomeIndex = lazy(() => import('pages/homeIndex'))
 const Error = lazy(() => import('pages/error'))
 const Home = lazy(() => import('pages/home'))
@@ -82,16 +87,46 @@ export const homeRouter = [
     path: '/home/authority/characterAuthority'
   },
   {
+    component: RouterTest11,
+    path: '/home/child/routerTest1/routerTest11'
+  },
+  {
+    component: RouterTest121,
+    path: '/home/child/routerTest1/routerTest12/routerTest121'
+  },
+  {
+    component: RouterTest122,
+    path: '/home/child/routerTest1/routerTest12/routerTest122'
+  },
+  {
+    to: '/home/child/routerTest1/routerTest12/routerTest121',
+    from: '/home/child/routerTest1/routerTest12',
+    redirect: true,
+  },
+  {
+    component: RouterTest12,
+    path: '/home/child/routerTest1/routerTest12'
+  },
+  {
+    component: RouterTest13,
+    path: '/home/child/routerTest1/routerTest13'
+  },
+  {
+    to: '/home/child/routerTest1/routerTest11',
+    from: '/home/child/routerTest1',
+    redirect: true,
+  },
+  {
     component: RouterTest1,
-    path: '/home/authority/child/routerTest1'
+    path: '/home/child/routerTest1'
   },
   {
     component: RouterTest2,
-    path: '/home/authority/child/routerTest2'
+    path: '/home/child/routerTest2'
   },
   {
-    to: '/home/authority/child/routerTest1',
-    from: '/home/authority/child',
+    to: '/home/child/routerTest1',
+    from: '/home/child',
     redirect: true,
   },
   {

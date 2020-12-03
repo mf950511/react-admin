@@ -5,12 +5,17 @@ import { useHistory } from 'react-router-dom'
 import { CaretDownOutlined } from '@ant-design/icons'
 import { normalDispatchEffect } from 'store/normal/effect'
 import avator from 'common/image/avator_small.gif'
+import { useIntl } from 'react-intl'
+import { IntlMessage } from 'language/type'
+import { messages } from 'language/intl'
 
 
 
 const DropDown = () => {
   const history = useHistory()
   const [sessionId, setSessionId] = normalDispatchEffect('sessionId', '')
+  const intl = useIntl()
+  const getIntl = (intlName: IntlMessage) => intl.formatMessage(messages[intlName])
 
   // 选择右侧下拉框操作
   const selectDrop = (e: any) => {
@@ -31,14 +36,14 @@ const DropDown = () => {
   const dropdownMenu = (
     <Menu onClick={ selectDrop }>
       <Menu.Item key="/home">
-        首页
+        { getIntl('index') }
       </Menu.Item>
       <Menu.Item key="/login">
-        个人中心
+        { getIntl('userCenter') }
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="logout">
-        退出登录
+        { getIntl('logout') }
       </Menu.Item>
     </Menu>
   )
