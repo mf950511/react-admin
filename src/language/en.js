@@ -1,8 +1,10 @@
 export default {
   message: 'English',
   formTitle: 'Login Form',
-  account: 'Username',
+  username: 'Username',
+  usernameTip: 'Please enter the correct user name',
   password: 'Password',
+  passwordTip: 'Please enter the correct password',
   loginBtn: 'Login',
   passwordContent: 'any',
   admin: 'Administrator',

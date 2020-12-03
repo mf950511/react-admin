@@ -6,16 +6,21 @@ import { get, post } from '../api/request'
 import { useHistory } from 'react-router-dom'
 import { normalDispatchEffect } from 'store/normal/effect'
 import { menuDispatchEffect } from 'store/menu/effect'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
+import { IntlMessage } from 'language/type'
+import { messages } from 'language/intl'
 
 
-console.log(get)
 
 const Login = () => {
+  const intl = useIntl()
   const history = useHistory()
   const [sessionId, setSessionId] = normalDispatchEffect('sessionId', '')
   // redux菜单栏
   const [menuInfo, setMenuInfo] = menuDispatchEffect()
+
+  const getIntl = (intlName: IntlMessage) => intl.formatMessage(messages[intlName])
+
 
   const onFinish = (values: any) => {
     post('/user/login', values).then(res => {
@@ -39,32 +44,35 @@ const Login = () => {
         <FormattedMessage
         id="formTitle"
         >
-          {txt => <h3 className="form-title">{ txt }</h3>}
+          {(txt:string) => <h3 className="form-title">{ txt }</h3>}
         </FormattedMessage>
         <Form.Item
           name="username"
-          rules={[{ required: true, message: '请输入账号！' }]}
+          rules={[{ required: true, message: getIntl('usernameTip') }]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="账号" />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder={ getIntl('username') } />
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: '请输入密码' }]}
+          rules={[{ required: true, message: getIntl('passwordTip') }]}
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
-            placeholder="账号"
+            placeholder={ getIntl('password') }
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-            登录
-          </Button>
+          <FormattedMessage
+          id="formTitle"
+          >
+            {(txt:string) => <Button type="primary" htmlType="submit" className="login-form-button">{ txt }</Button>}
+          </FormattedMessage>
+          
         </Form.Item>
         <Form.Item>
-          <p className="tip">账号：admin 密码：随便填  管理员权限</p>
-          <p className="tip">账号：editor 密码：随便填  操作员权限</p>
+          <p className="tip">{`${ getIntl('username') }：admin ${ getIntl('password') }：${ getIntl('passwordContent') }  (${ getIntl('admin') })`}</p>
+          <p className="tip">{`${ getIntl('username') }：editor ${ getIntl('password') }：${ getIntl('passwordContent') }  (${ getIntl('editor') })`}</p>
         </Form.Item>
       </Form>
     </div>
