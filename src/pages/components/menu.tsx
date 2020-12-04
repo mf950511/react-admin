@@ -10,6 +10,7 @@ import { post } from 'api/request'
 import { useIntl } from 'react-intl'
 import { IntlMessage } from 'language/type'
 import { messages } from 'language/intl'
+import { getStorage, setStorage } from 'lib/untils'
 import {
   BankOutlined,
   FileTextOutlined,
@@ -61,12 +62,18 @@ const LeftMenu = () => {
 
   // 菜单为空则进行请求
   const getMenu = async () => {
+    const menuInfo = getStorage('menu', [])
+    if(menuInfo && menuInfo.length) {
+      setMenuInfo(menuInfo)
+      return
+    }
     const menu = await post('/user/menu').then(res => {
       const data = res.data || {}
       const { menu = [] } = data
       return menu
     })
     setMenuInfo(menu)
+    setStorage('menu', menu)
   }
 
   useEffect(() => {

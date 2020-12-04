@@ -12,7 +12,6 @@ import './config.ts'
 const request = async (_options: any) => {
   // 默认GET方法
   const method = _options.method || 'GET'
-  console.log(4444, _options, method)
   return axios(_options)
 }
 

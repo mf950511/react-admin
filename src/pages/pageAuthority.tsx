@@ -4,78 +4,43 @@ import { menuDispatchEffect } from 'store/menu/effect'
 import { Button, Table, Space, Modal, Tree } from 'antd'
 import 'common/css/authority.less'
 import { SideBar } from 'store/menu/types'
-
+import MenuInfo from 'common/js/menu'
+import { useIntl } from 'react-intl'
+import { IntlMessage } from 'language/type'
+import { messages } from 'language/intl'
+import { MenuType } from 'types/menu'
 interface PageAuthority {
   key: number;
   userType: string;
   userName: string;
   describe: string;
+  permission: MenuType;
   [PropName: string]: any;
 }
 
-interface UserPageAuthority {
-  key: string;
-  title: string;
-  children?: UserPageAuthority[];
+interface allAuthorityType {
+  admin: string[];
+  editor: string[];
+  visitor: string[];
 }
+
+const authorityType: MenuType[] = ['admin', 'editor', 'visitor']
 
 const dataSource: PageAuthority[] = [
   {
     key: 1,
     userType: '超级管理员',
     userName: 'admin',
-    describe: '哥就是牛逼，哥啥都能干，啥都能访问'
+    describe: '哥就是牛逼，哥啥都能干，啥都能访问',
+    permission: 'admin'
   },
   {
     key: 2,
     userType: '管理员',
     userName: 'editor',
-    describe: '哥不如上面的牛逼，但是也能访问大多数页面'
+    describe: '哥不如上面的牛逼，但是也能访问大多数页面',
+    permission: 'editor'
   }
-]
-
-// 所有路由权限
-const dataTree: UserPageAuthority[] = [
-  {
-    key: '/index',
-    title: '首页'
-  },
-  {
-    key: '/doc',
-    title: '文档'
-  },
-  {
-    key: '/guide',
-    title: '引导页'
-  },
-  {
-    key: '/authority',
-    title: '权限测试页',
-    children: [
-      {
-        key: '/pageAuthority',
-        title: '页面权限'
-      },
-      {
-        key: '/characterAuthority',
-        title: '角色权限'
-      },
-      {
-        key: '/child',
-        title: '子路由',
-        children: [
-          {
-            key: '/routerTest1',
-            title: '路由1',
-          },
-          {
-            key: '/routerTest2',
-            title: '路由2',
-          }
-        ]
-      }
-    ]
-  },
 ]
 
 
@@ -87,15 +52,18 @@ const PageAuthority = () => {
   // 是否展示权限编辑框
   const [showEdit, setShowEdit] = useState<boolean>(false)
   // 权限列表
-  const [treeData, setTreeData] = useState<UserPageAuthority[]>([])
+  const [treeData, setTreeData] = useState<any[]>([])
   // 用户完整权限合集
-  const [checkedKeysAll, setCheckedKeysAll] = useState<string[]>([])// 选中权限数据
+  const [checkedKeysAll, setCheckedKeysAll] = useState<allAuthorityType>(null)// 选中权限数据
   // 单独用户权限集
   const [checkedKeys, setCheckedKeys] = useState<string[]>([])
   // 用户权限数据
   const [authorityInfo, setAuthorityInfo] = useState(null)
   // 当前用户信息
   const [activityRecord, setActivityRecord] = useState<PageAuthority>(null)
+  // 语言国际化
+  const intl = useIntl()
+  const getIntl = (intlName: IntlMessage) => intl.formatMessage(messages[intlName])
   const columns = [
     {
       title: '用户类别',
@@ -126,22 +94,35 @@ const PageAuthority = () => {
   ]
 
   useEffect(() => {
-    setTreeData(dataTree)
+    getAllAuthority()
     getUserAuthority()
     setData(dataSource)
   }, [])
 
+  const getAllAuthority = () => {
+    traverse(MenuInfo['admin'], [])
+    setTreeData(MenuInfo['admin'])
+  }
+
   // 获取当前用户的权限列表作为默认列表
   const getUserAuthority = () => {
-    let nowUserAuthority: string[] = []
-    traverse(menuInfo, nowUserAuthority)
-    setCheckedKeysAll(nowUserAuthority)
+    let allAuthority: allAuthorityType = {
+      admin: [],
+      editor: [],
+      visitor: []
+    }
+    authorityType.map(item => {
+      traverse(MenuInfo[item], allAuthority[item])
+    })
+    setCheckedKeysAll(allAuthority)
   }
 
   // 遍历生成用户权限表
   const traverse = (menu: SideBar[], authorityList: string[]) => {
     menu.map((item, key) => {
-      authorityList.push(item.path)
+      (!item.children || !item.children.length) && authorityList.push(item.path)
+      item.key = item.path
+      item.title = getIntl(item.breadcrumbName as IntlMessage)
       if(item.children) {
         traverse(item.children, authorityList)
       }
@@ -150,7 +131,7 @@ const PageAuthority = () => {
 
   // 编辑权限操作
   const editModalShow = (record: PageAuthority) => {
-    const authority = authorityInfo && authorityInfo[record.userName] || checkedKeysAll
+    const authority = authorityInfo && authorityInfo[record.permission] || checkedKeysAll[record.permission]
     setActivityRecord(record)
     setCheckedKeys(authority)
     setShowEdit(true)
@@ -183,8 +164,9 @@ const PageAuthority = () => {
     cloneData.push({
       key: data.length + 1,
       userName: '张三',
-      userType: 'visitor',
-      describe: '我只是进来逛逛，啥也不干'
+      userType: '游客',
+      describe: '我只是进来逛逛，啥也不干',
+      permission: 'visitor'
     })
     setData(cloneData)
   }
@@ -198,7 +180,7 @@ const PageAuthority = () => {
     let authority = authorityInfo || {}
     authority = {
       ...authority,
-      [activityRecord.userName]: checkedKeys
+      [activityRecord.permission]: checkedKeys
     }
     setAuthorityInfo(authority)
     setShowEdit(false)

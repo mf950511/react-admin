@@ -9,7 +9,9 @@ import { menuDispatchEffect } from 'store/menu/effect'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { IntlMessage } from 'language/type'
 import { messages } from 'language/intl'
-
+import { setStorage } from 'lib/untils'
+import MenuInfo from 'common/js/menu'
+import { MenuType } from 'types/menu'
 
 
 const Login = () => {
@@ -26,8 +28,10 @@ const Login = () => {
     post('/user/login', values).then(res => {
       const data = res.data || {}
       const { sessionId, menu } = data
+      const { username }: { username: MenuType } = values
       setSessionId(sessionId)
-      setMenuInfo(menu)
+      setMenuInfo( MenuInfo[username] || menu)
+      setStorage('menu', MenuInfo[username] || menu)
       history.push('/home')
     }, err => {
       console.log('登录出错了', err)
