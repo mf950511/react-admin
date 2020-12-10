@@ -5,22 +5,13 @@ import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { normalDispatchEffect } from 'store/normal/effect'
 import { rootRouter } from 'router/routeConfig'
 const Login = lazy(() => import('pages/login'))
+import SuspenseLoading from 'pages/components/suspenseLoading'
 
 const RouterConfig = () => {
   const [sessionId] = normalDispatchEffect('sessionId', '')
   return (
     <Router>
-      <Suspense fallback={<div className="loader">
-        <div className="loader-inner">
-          {
-            [1,2,3,4, 5].map(item => (
-              <div className="loader-line-wrap" key={ item }>
-                <div className="loader-line"></div>
-              </div>
-            ))
-          }
-        </div>
-      </div>}>
+      <Suspense fallback={ <SuspenseLoading/> }>
         <Switch>
           <Route path="/login" component={ Login }></Route>
           {

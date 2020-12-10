@@ -15,6 +15,23 @@ const Error = lazy(() => import('pages/error'))
 const Home = lazy(() => import('pages/home'))
 const Login = lazy(() => import('pages/login'))
 const Test = lazy(() => import('pages/test2'))
+// import Doc from 'pages/doc'
+// import Guide from 'pages/guide'
+// import PageAuthority from 'pages/pageAuthority'
+// import UserAuthority from 'pages/userAuthority'
+// import RouterTest1 from 'pages/routerTest'
+// import RouterTest2 from 'pages/RouterTest2'
+// import RouterTest11 from 'pages/RouterTest11'
+// import RouterTest12 from 'pages/RouterTest12'
+// import RouterTest13 from 'pages/RouterTest13'
+// import RouterTest121 from 'pages/RouterTest121'
+// import RouterTest122 from 'pages/RouterTest122'
+// import HomeIndex from 'pages/HomeIndex'
+// import Error from 'pages/Error'
+// import Home from 'pages/Home'
+// import Login from 'pages/Login'
+// import Test from 'pages/test2'
+
 // 外层主路由
 export const rootRouter = [
   {

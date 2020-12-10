@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Layout } from 'antd'
 const { Header, Sider, Content } = Layout
-const { useState } = React
+const { useState, Suspense } = React
 import '@/common/css/home.less'
 import { Route, Redirect, HashRouter as Router, Switch as RouterSwitch, useLocation } from 'react-router-dom'
 import LeftMenu from './components/menu'
@@ -55,15 +55,17 @@ const Home = () => {
               classNames="route"
               timeout={300}
               >
-                <RouterSwitch location={location}>
-                  {
-                    homeRouter.map((route, i) => (
-                      route.redirect 
-                      ? <Redirect key={route.path || i} to={ route.to } from={ route.from }></Redirect> 
-                      : <Route key={route.path || i} path={ route.path } component={ route.component }></Route>
-                    ))
-                  }
-                </RouterSwitch>
+                <Suspense fallback={ <div></div> }>
+                  <RouterSwitch location={location}>
+                    {
+                      homeRouter.map((route, i) => (
+                        route.redirect 
+                        ? <Redirect key={route.path || i} to={ route.to } from={ route.from }></Redirect> 
+                        : <Route key={route.path || i} path={ route.path } component={ route.component }></Route>
+                      ))
+                    }
+                  </RouterSwitch>
+                </Suspense>
               </CSSTransition>
             </TransitionGroup>
             
