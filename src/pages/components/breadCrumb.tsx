@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 const { useEffect, useState } = React
 import { Breadcrumb } from 'antd'
 import { RouteInfo } from 'types/home'
@@ -8,9 +8,11 @@ import { menuDispatchEffect } from 'store/menu/effect'
 import { useIntl, FormattedMessage } from 'react-intl'
 import { IntlMessage } from 'language/type'
 import { messages } from 'language/intl'
+import { homeRouter } from 'router/routeConfig'
 
 
 const BreadCrumb = () => {
+  const history = useHistory()
   const location = useLocation()
   // 路由栈初始值
   const initState: RouteInfo = {}
@@ -61,13 +63,33 @@ const BreadCrumb = () => {
     setRouterInfo(info)
   }, [menuInfo])
 
+  const navToLink = (link: string) => {
+    let realLink = recursion(link)
+    if(currentRoute && currentRoute[currentRoute.length - 1] === realLink) {
+      return 
+    } else {
+      history.push(link)
+    }
+  }
+
+  const recursion: (link: string) => string = (link: string) => {
+    for(let i = 0; i < homeRouter.length; i++) {
+      let route = homeRouter[i]
+      if(route.from === link) {
+        console.log(2345, link)
+        return recursion(route.to)
+      }
+    }
+    return link
+  }
+
   return (
     <div className="home-bread">
       <Breadcrumb className="home-bread-list">
         {
           currentRoute.map((item) => (
             <Breadcrumb.Item key={ item }>
-              <Link to={ item }>{ getIntl(routerInfo[item] as IntlMessage) }</Link>
+              <span className="link" onClick={ () => { navToLink(item) } }>{ getIntl(routerInfo[item] as IntlMessage) }</span>
             </Breadcrumb.Item>
           ))
         }

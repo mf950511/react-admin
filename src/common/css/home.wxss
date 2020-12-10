@@ -19,11 +19,8 @@ html {
 .home-wrapper .home-header {
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-  padding: 0;
-  height: 85px;
-}
-.home-wrapper .home-header .operator-wrapper {
   height: 50px;
+  padding: 0;
   display: flex;
   align-items: center;
 }
@@ -34,12 +31,6 @@ html {
 .home-wrapper .home-header .home-operator .home-operator-icon {
   font-size: 20px;
   color: #000;
-}
-.home-wrapper .home-header .tag-wrapper {
-  height: 35px!important;
-  width: 400px;
-  overflow-x: scroll;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
 }
 .home-wrapper .route-enter,
 .home-wrapper .route-appear {
@@ -75,6 +66,10 @@ html {
   display: flex;
   align-items: center;
 }
+.home-wrapper .home-bread .ant-breadcrumb > span:not(:last-child):hover {
+  cursor: pointer;
+  color: #1890ff;
+}
 .home-wrapper .home-dropdown {
   margin-right: 30px;
   display: flex;
@@ -94,6 +89,24 @@ html {
   bottom: 4px;
   right: -10px;
   font-size: 12px;
+}
+.home-wrapper .normal-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.home-wrapper .normal-dropdown:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+.home-wrapper .language-dropdown {
+  height: 50px;
+  padding: 0 8px;
+}
+.home-wrapper .language-dropdown .icon {
+  font-size: 20px;
 }
 .home-wrapper .statistics-wrapper .statistics {
   background: #fff;

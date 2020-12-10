@@ -12,7 +12,20 @@
 
 之前有看到[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)的项目，喜欢它构建的后台管理系统，但是是基于vue的，所以想要用react实现一个相同的管理系统，并附上开发教程
 
-## 使用方式
+### 项目地址
+
+- [效果演示地址](http://47.104.71.163/react-admin/index.html#/login) 所处地区域名备案太麻烦，暂时先用ip访问吧
+
+### 分支说明
+
+- master是本人开发使用的原始分支，涉及到与node交互，需要搭配node项目使用，node项目地址为 git@github.com:mf950511/react-admin.git 
+- release分支是去除了node交互的分支，可以直接本地运行，减少了node对开发人员的影响，有需要的话可以clone本分支研究
+
+### 技术栈使用
+
+- 前端技术栈：react、react-router、redux、typescript、webpack、antd、react-intl
+
+## 使用方式（release分支）
 
 ```js
 // 克隆项目
