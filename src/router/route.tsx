@@ -11,7 +11,7 @@ const RouterConfig = () => {
   const [sessionId] = normalDispatchEffect('sessionId', '')
   return (
     <Router>
-      <Suspense fallback={ <SuspenseLoading/> }>
+      <Suspense fallback={ <div></div> }>
         <Switch>
           <Route path="/login" component={ Login }></Route>
           {
