@@ -22,11 +22,13 @@ const DropDown = () => {
     const { key } = e
     switch(key) {
       case 'logout':
+        history.push('/login')
+        setSessionId('')
+        return
         post('/user/logout').then(res => {
           history.push('/login')
           setSessionId('')
         })
-        return
       default:
         history.push(key)
     }

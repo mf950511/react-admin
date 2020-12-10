@@ -25,6 +25,12 @@ const Login = () => {
 
 
   const onFinish = (values: any) => {
+    const { username }: { username: MenuType } = values
+    if(['admin', 'editor'].includes(username)) {
+      setStorage('menu', MenuInfo[username])
+      history.push('/home')
+    }
+    return 
     post('/user/login', values).then(res => {
       const data = res.data || {}
       const { sessionId, menu } = data
