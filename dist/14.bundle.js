@@ -1,1 +1,1 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{56:function(e,n,c){"use strict";c.r(n);var t=c(0);n.default=function(){return t.createElement("div",{className:"doc"},"我是文档页")}}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[14],{78:function(e,n,t){"use strict";t.r(n);var a=t(0);n.default=function(){return a.createElement("div",{className:"chart"},"图表页")}}}]);

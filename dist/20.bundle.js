@@ -1,1 +1,1 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{65:function(e,n,t){"use strict";t.r(n);var a=t(0);n.default=function(){return a.createElement("div",{className:"guide"},"我是路由测试页1-2-1")}}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{70:function(n,e,c){"use strict";c.r(e);var o=c(0);e.default=function(){return o.createElement("div",{className:"iconShow"},"Icon选择页")}}}]);

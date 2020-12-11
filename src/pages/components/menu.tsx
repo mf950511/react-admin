@@ -16,13 +16,23 @@ import {
   FileTextOutlined,
   SendOutlined,
   PropertySafetyOutlined,
+  AppstoreAddOutlined,
+  AreaChartOutlined,
+  ProjectOutlined,
+  TableOutlined,
+  ItalicOutlined,
 } from '@ant-design/icons';
 
 const Icons = {
   BankOutlined,
   FileTextOutlined,
   SendOutlined,
-  PropertySafetyOutlined
+  PropertySafetyOutlined,
+  AppstoreAddOutlined,
+  AreaChartOutlined,
+  ProjectOutlined,
+  TableOutlined,
+  ItalicOutlined,
 }
 
 // 渲染左侧菜单

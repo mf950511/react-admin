@@ -87,5 +87,35 @@ export const messages = defineMessages({
   },
   logout: {
     id: 'logout'
-  }
+  },
+  icon: {
+    id: 'icon'
+  },
+  richText: {
+    id: 'richText'
+  },
+  json: {
+    id: 'json'
+  },
+  markDown: {
+    id: 'markDown'
+  },
+  dropZone: {
+    id: 'dropZone'
+  },
+  headUpload: {
+    id: 'headUpload'
+  },
+  stiky: {
+    id: 'stiky'
+  },
+  component: {
+    id: 'component'
+  },
+  chart: {
+    id: 'chart'
+  },
+  table: {
+    id: 'table'
+  },
 })

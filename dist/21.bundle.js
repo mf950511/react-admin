@@ -1,1 +1,1 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{66:function(e,n,t){"use strict";t.r(n);var a=t(0);n.default=function(){return a.createElement("div",{className:"guide"},"我是路由测试页1-2-2")}}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{76:function(n,e,s){"use strict";s.r(e);var t=s(0);e.default=function(){return t.createElement("div",{className:"json"},"JSON编辑页")}}}]);

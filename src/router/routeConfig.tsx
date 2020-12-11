@@ -15,6 +15,15 @@ const Error = lazy(() => import('pages/error'))
 const Home = lazy(() => import('pages/home'))
 const Login = lazy(() => import('pages/login'))
 const Test = lazy(() => import('pages/test2'))
+const IconShow = lazy(() => import('pages/iconShow'))
+const DropZone = lazy(() => import('pages/dropZone'))
+const HeadUpload = lazy(() => import('pages/headUpload'))
+const MarkDown = lazy(() => import('pages/markDown'))
+const RichText = lazy(() => import('pages/richText'))
+const Stiky = lazy(() => import('pages/stiky'))
+const JSON = lazy(() => import('pages/json'))
+const Table = lazy(() => import('pages/table'))
+const Chart = lazy(() => import('pages/chart'))
 // import Doc from 'pages/doc'
 // import Guide from 'pages/guide'
 // import PageAuthority from 'pages/pageAuthority'
@@ -73,6 +82,42 @@ export const rootRouter = [
   {
     component: RouterTest2,
     path: '/routerTest2'
+  },
+  {
+    component: IconShow,
+    path: '/iconShow'
+  },
+  {
+    component: DropZone,
+    path: '/dropZone'
+  },
+  {
+    component: HeadUpload,
+    path: '/headUpload'
+  },
+  {
+    component: MarkDown,
+    path: '/markDown'
+  },
+  {
+    component: RichText,
+    path: '/richText'
+  },
+  {
+    component: Stiky,
+    path: '/stiky'
+  },
+  {
+    component: JSON,
+    path: '/json'
+  },
+  {
+    component: Chart,
+    path: '/chart'
+  },
+  {
+    component: Table,
+    path: '/table'
   },
   {
     to: '/login',
@@ -149,6 +194,47 @@ export const homeRouter = [
   {
     to: '/home/authority/pageAuthority',
     from: '/home/authority',
+    redirect: true,
+  },
+  {
+    component: IconShow,
+    path: '/home/iconShow'
+  },
+  {
+    component: DropZone,
+    path: '/home/component/dropZone'
+  },
+  {
+    component: HeadUpload,
+    path: '/home/component/headUpload'
+  },
+  {
+    component: MarkDown,
+    path: '/home/component/markDown'
+  },
+  {
+    component: RichText,
+    path: '/home/component/richText'
+  },
+  {
+    component: Stiky,
+    path: '/home/component/stiky'
+  },
+  {
+    component: JSON,
+    path: '/home/component/json'
+  },
+  {
+    component: Chart,
+    path: '/home/chart'
+  },
+  {
+    component: Table,
+    path: '/home/table'
+  },
+  {
+    to: '/home/component/richText',
+    from: '/home/component',
     redirect: true,
   },
   {

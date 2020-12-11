@@ -26,57 +26,96 @@ export default {
             },
             {
                 "breadcrumbName":"rolePermission",
-                "path":"/characterAuthority",
-                "icon":"SendOutlined"
+                "path": "/characterAuthority"
             }
         ]
     },
     {
+        "breadcrumbName":"icon",
+        "icon":"ItalicOutlined",
+        "path":"/iconShow"
+    },
+    {
+        "breadcrumbName":"component",
+        "icon":"AppstoreAddOutlined",
+        "path":"/component",
+        "children":[
+          {
+              "breadcrumbName":"richText",
+              "path":"/richText"
+          },
+          {
+              "breadcrumbName":"json",
+              "path":"/json"
+          },
+          {
+              "breadcrumbName":"markDown",
+              "path":"/markDown"
+          },
+          {
+              "breadcrumbName":"dropZone",
+              "path":"/dropZone"
+          },
+          {
+              "breadcrumbName":"headUpload",
+              "path":"/headUpload"
+          },
+          {
+              "breadcrumbName":"stiky",
+              "path":"/stiky"
+          },
+      ]
+    },
+    {
+        "breadcrumbName":"chart",
+        "icon":"AreaChartOutlined",
+        "path":"/chart"
+    },
+    {
         "breadcrumbName": "routeTitle",
         "path":"/child",
+        "icon":"ProjectOutlined",
         "children":[
             {
                 "breadcrumbName":"route1",
                 "path":"/routerTest1",
-                "icon":"SendOutlined",
                 "children": [
                     {
                         "breadcrumbName":"route11",
-                        "path":"/routerTest11",
-                        "icon":"SendOutlined"
+                        "path":"/routerTest11"
                     },
                     {
                         "breadcrumbName":"route12",
                         "path":"/routerTest12",
-                        "icon":"SendOutlined",
                         "children": [
                             {
                                 "breadcrumbName":"route121",
-                                "path":"/routerTest121",
-                                "icon":"SendOutlined"
+                                "path":"/routerTest121"
                                 
                             },
                             {
                                 "breadcrumbName":"route122",
-                                "path":"/routerTest122",
-                                "icon":"SendOutlined"
+                                "path":"/routerTest122"
                             }
                         ]
                     },
                     {
                         "breadcrumbName":"route13",
-                        "path":"/routerTest13",
-                        "icon":"SendOutlined"
+                        "path":"/routerTest13"
                     }
                 ]
             },
             {
                 "breadcrumbName":"route2",
-                "path":"/routerTest2",
-                "icon":"SendOutlined"
+                "path":"/routerTest2"
             }
         ]
-    }
+    },
+    {
+        "breadcrumbName":"table",
+        "icon":"TableOutlined",
+        "path":"/table"
+    },
   ],
   "editor": [
     {
@@ -112,45 +151,73 @@ export default {
             {
                 "breadcrumbName":"route1",
                 "path":"/routerTest1",
-                "icon":"SendOutlined",
                 "children": [
                     {
                         "breadcrumbName":"route11",
-                        "path":"/routerTest11",
-                        "icon":"SendOutlined"
+                        "path":"/routerTest11"
                     },
                     {
                         "breadcrumbName":"route12",
                         "path":"/routerTest12",
-                        "icon":"SendOutlined",
                         "children": [
                             {
                                 "breadcrumbName":"route121",
-                                "path":"/routerTest121",
-                                "icon":"SendOutlined"
-                                
+                                "path":"/routerTest121"
                             },
                             {
                                 "breadcrumbName":"route122",
-                                "path":"/routerTest122",
-                                "icon":"SendOutlined"
+                                "path":"/routerTest122"
                             }
                         ]
                     },
                     {
                         "breadcrumbName":"route13",
-                        "path":"/routerTest13",
-                        "icon":"SendOutlined"
+                        "path":"/routerTest13"
                     }
                 ]
             },
             {
                 "breadcrumbName":"route2",
-                "path":"/routerTest2",
-                "icon":"SendOutlined"
+                "path":"/routerTest2"
             }
         ]
-    }
+    },
+    {
+        "breadcrumbName":"icon",
+        "icon":"SendOutlined",
+        "path":"/iconShow"
+    },
+    {
+        "breadcrumbName":"component",
+        "icon":"PropertySafetyOutlined",
+        "path":"/component",
+        "children":[
+          {
+              "breadcrumbName":"richText",
+              "path":"/richText"
+          },
+          {
+              "breadcrumbName":"json",
+              "path":"/json"
+          },
+          {
+              "breadcrumbName":"markDown",
+              "path":"/markDown"
+          },
+          {
+              "breadcrumbName":"dropZone",
+              "path":"/dropZone"
+          },
+          {
+              "breadcrumbName":"headUpload",
+              "path":"/headUpload"
+          },
+          {
+              "breadcrumbName":"stiky",
+              "path":"/stiky"
+          },
+      ]
+    },
   ],
   "visitor": [
     {

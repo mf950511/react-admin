@@ -28,5 +28,15 @@ export default {
   purchase: '收入',
   shopping: '购物车',
   userCenter: '个人中心',
-  logout: '退出登录'
+  logout: '退出登录',
+  icon: 'Icon',
+  richText: '富文本编辑器',
+  json: 'JSON编辑器',
+  markDown: 'MarkDown',
+  dropZone: '拖拽上传',
+  headUpload: '头像上传',
+  stiky: 'Stiky',
+  component: '组件',
+  chart: '图表',
+  table: '表格',
 }

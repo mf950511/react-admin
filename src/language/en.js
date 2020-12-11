@@ -27,5 +27,15 @@ export default {
   purchase: 'Purchases',
   shopping: 'Shoppings',
   userCenter: 'Profile',
-  logout: 'Log Out'
+  logout: 'Log Out',
+  icon: 'Icon',
+  richText: 'Tinymce',
+  json: 'JSON Editor',
+  markDown: 'Markdown',
+  dropZone: 'Dropzone',
+  headUpload: 'Avator Upload',
+  stiky: 'Stiky',
+  component: 'Components',
+  chart: 'Charts',
+  table: 'Table',
 }
