@@ -2,10 +2,9 @@ import * as React from 'react'
 import '@/common/css/login.less'
 import { Form, Button, Input } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { get, post } from '../api/request'
+import { post } from '../api/request'
 import { useHistory } from 'react-router-dom'
-import { normalDispatchEffect } from 'store/normal/effect'
-import { menuDispatchEffect } from 'store/menu/effect'
+import { useMenuDispatchEffect } from 'hooks/menu/effect'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { IntlMessage } from 'language/type'
 import { messages } from 'language/intl'
@@ -17,9 +16,8 @@ import { MenuType } from 'types/menu'
 const Login = () => {
   const intl = useIntl()
   const history = useHistory()
-  const [sessionId, setSessionId] = normalDispatchEffect('sessionId', '')
   // redux菜单栏
-  const [menuInfo, setMenuInfo] = menuDispatchEffect()
+  const [menuInfo, setMenuInfo] = useMenuDispatchEffect()
 
   const getIntl = (intlName: IntlMessage) => intl.formatMessage(messages[intlName])
 
@@ -29,7 +27,7 @@ const Login = () => {
       const data = res.data || {}
       const { sessionId, menu } = data
       const { username }: { username: MenuType } = values
-      setSessionId(sessionId)
+      setStorage('sessionId', sessionId)
       setMenuInfo( MenuInfo[username] || menu)
       setStorage('menu', MenuInfo[username] || menu)
       history.push('/home')

@@ -1,6 +1,6 @@
 import * as React from 'react'
 const { useState, useEffect } = React
-import { menuDispatchEffect } from 'store/menu/effect'
+import { useMenuDispatchEffect } from 'hooks/menu/effect'
 import { Button, Table, Space, Modal, Tree } from 'antd'
 import 'common/css/authority.less'
 import { SideBar } from 'store/menu/types'
@@ -24,6 +24,8 @@ interface allAuthorityType {
   visitor: string[];
 }
 
+type AlignType = 'center' | 'left' | 'right'
+
 const authorityType: MenuType[] = ['admin', 'editor', 'visitor']
 
 const dataSource: PageAuthority[] = [
@@ -46,7 +48,7 @@ const dataSource: PageAuthority[] = [
 
 const PageAuthority = () => {
   // redux菜单栏
-  const [menuInfo, setMenuInfo] = menuDispatchEffect()
+  const [menuInfo, setMenuInfo] = useMenuDispatchEffect()
   // 表格数据
   const [data, setData] = useState<PageAuthority[]>([])
   // 是否展示权限编辑框
@@ -68,12 +70,12 @@ const PageAuthority = () => {
     {
       title: '用户类别',
       dataIndex: 'userType',
-      align: 'center' as 'center'
+      align: 'center' as AlignType
     },
     {
       title: '用户名',
       dataIndex: 'userName',
-      align: 'center' as 'center'
+      align: 'center' as AlignType
     },
     {
       title: '权限描述',
@@ -81,7 +83,7 @@ const PageAuthority = () => {
     },
     {
       title: '操作',
-      align: 'center' as 'center',
+      align: 'center' as AlignType,
       render: (record: PageAuthority) => {
         return (
           <Space size="middle">
@@ -106,7 +108,7 @@ const PageAuthority = () => {
 
   // 获取当前用户的权限列表作为默认列表
   const getUserAuthority = () => {
-    let allAuthority: allAuthorityType = {
+    const allAuthority: allAuthorityType = {
       admin: [],
       editor: [],
       visitor: []

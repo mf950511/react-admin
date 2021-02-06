@@ -1,13 +1,14 @@
-export const debounce = (fn: Function, debunceTime: number) => {
+import { CallbackFunction } from 'types/common'
+export const debounce: (fn: CallbackFunction, debunceTime: number) => CallbackFunction = (fn, debunceTime) => {
   let timerId: number | null = null
-  return function(...rest: any){
+  return function(...rest: any[]){
     if(timerId) {
       return
     }
     timerId = window.setTimeout(() => {
       clearTimeout(timerId)
       timerId = null
-      fn.apply(null, rest)
+      fn.apply(null, ...rest)
     }, debunceTime)
   }
   
@@ -31,4 +32,8 @@ export const getStorage = (key: string, defaultValue: any) => {
 
 export const setStorage = (key: string, value: any) => {
   return value === undefined ? window.localStorage.removeItem(key) : window.localStorage.setItem(key, JSON.stringify(value))
+}
+
+export const removeStorage = (key: string) => {
+  return window.localStorage.removeItem(key)
 }

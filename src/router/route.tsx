@@ -1,14 +1,13 @@
 import * as React from 'react'
 import { lazy,Suspense } from 'react'
-const { useState } = React
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { normalDispatchEffect } from 'store/normal/effect'
 import { rootRouter } from 'router/routeConfig'
 const Login = lazy(() => import('pages/login'))
 import SuspenseLoading from 'pages/components/suspenseLoading'
+import { getStorage } from 'lib/untils'
 
 const RouterConfig = () => {
-  const [sessionId] = normalDispatchEffect('sessionId', '')
+  const sessionId = getStorage('sessionId', '')
   return (
     <Router>
       <Suspense fallback={ <div></div> }>

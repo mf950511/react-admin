@@ -6,13 +6,14 @@
  * @Description: In User Settings Edit
  * @FilePath: \react-admin\src\lib\events.ts
  */ 
+import { CallbackFunction } from 'types/common'
 
 class EventEmit {
   event: any = {}
   // 记录方法
-  $on(cbName: string, fn: Function){
+  $on(cbName: string, fn: CallbackFunction){
     if(cbName in this.event) {
-      if(this.event[cbName].some((item: Function) => item === fn)) {
+      if(this.event[cbName].some((item: CallbackFunction) => item === fn)) {
         return
       }
       this.event[cbName].push(fn)
@@ -27,17 +28,17 @@ class EventEmit {
     if(!this.event[cbName]) {
       return 
     }
-    this.event[cbName].forEach((item: any) => {
-      item.apply(null, rest)
+    this.event[cbName].forEach((item: CallbackFunction) => {
+      item(rest)
     })
   }
 
   // 销毁事件
-  $destory(cbName: string, fn: Function) {
+  $destory(cbName: string, fn: CallbackFunction) {
     if(!this.event[cbName]) {
       return 
     }
-    const index = this.event[cbName].findIndex((item: Function) => item === fn)
+    const index = this.event[cbName].findIndex((item: CallbackFunction) => item === fn)
     if(index === -1) {
       return 
     } else {

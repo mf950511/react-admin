@@ -5,12 +5,13 @@ import { Menu } from 'antd'
 const { SubMenu } = Menu
 import { SideBar } from 'store/menu/types'
 import { IconObject } from 'types/home'
-import { menuDispatchEffect } from 'store/menu/effect'
+import { useMenuDispatchEffect } from 'hooks/menu/effect'
 import { post } from 'api/request'
 import { useIntl } from 'react-intl'
 import { IntlMessage } from 'language/type'
 import { messages } from 'language/intl'
 import { getStorage, setStorage } from 'lib/untils'
+import { CallbackFunctionString } from 'types/common'
 import {
   BankOutlined,
   FileTextOutlined,
@@ -36,7 +37,7 @@ const Icons = {
 }
 
 // 渲染左侧菜单
-const sideBarTree = (menuArr: SideBar[], getIntl: Function) => {
+const sideBarTree = (menuArr: SideBar[], getIntl: CallbackFunctionString) => {
   if(menuArr && menuArr.length) {
     return menuArr.map((item, index) => {
       return (
@@ -68,7 +69,7 @@ const LeftMenu = () => {
   const [activeMenu, setActiveMenu] = useState(initActiveMenu)
 
   // redux菜单栏
-  const [menuInfo, setMenuInfo] = menuDispatchEffect()
+  const [menuInfo, setMenuInfo] = useMenuDispatchEffect()
 
   // 菜单为空则进行请求
   const getMenu = async () => {

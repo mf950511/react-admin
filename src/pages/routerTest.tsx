@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { normalDispatchEffect } from 'store/normal/effect'
+import { useDispatchEffect } from 'hooks/normal/effect'
 import {useIntl, FormattedDate, FormattedMessage} from 'react-intl'
 const RouterTest1 = () => {
-  const [language, setLanguage] = normalDispatchEffect('language', 'zh')
+  const [language, setLanguage] = useDispatchEffect('language', 'zh')
   return (
     <div className="guide">我是路由测试页1 
       <FormattedDate value={1606894279773} year="numeric"

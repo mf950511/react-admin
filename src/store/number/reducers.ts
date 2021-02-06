@@ -8,7 +8,7 @@
  */ 
 import { NumberActionTypes, INCREMENT, DECREMENT } from './types'
 
-const initialState: number = 0
+const initialState = 0
 
 const numberReducer = (state = initialState, action: NumberActionTypes) : number => {
   switch(action.type) {

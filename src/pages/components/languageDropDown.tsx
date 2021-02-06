@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { Dropdown, Menu } from 'antd'
 import { post } from 'api/request'
-import { normalDispatchEffect } from 'store/normal/effect'
+import { useDispatchEffect } from 'hooks/normal/effect'
 
 
 
 const DropDown = () => {
-  const [language, setLanguage] = normalDispatchEffect('language', 'zh')
+  const [language, setLanguage] = useDispatchEffect('language', 'zh')
   // 选择右侧下拉框操作
   const selectDrop = (e: any) => {
     const { key = '' } = e

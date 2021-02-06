@@ -4,9 +4,10 @@ import echarts from 'echarts'
 // 引入防抖函数debounce
 import { debounce } from 'lib/untils'
 import Events from 'lib/events'
+import { CallbackFunction } from 'types/common'
 
 interface Chart{
-  resize: Function;
+  resize: CallbackFunction;
   [PropName: string]: any;
 }
 interface ChartProps{

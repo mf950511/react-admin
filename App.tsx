@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Router from './src/router/route'
-import { useIntl, IntlProvider } from 'react-intl'
-import { normalDispatchEffect } from './src/store/normal/effect'
+import { IntlProvider } from 'react-intl'
+import { useDispatchEffect } from './src/hooks/normal/effect'
 import en from './src/language/en'
 import zh from './src/language/zh'
 const message = {
@@ -9,7 +9,7 @@ const message = {
   zh
 }
 const App = () => {
-  const [language, setLanguage] = normalDispatchEffect('language', 'zh')
+  const [language] = useDispatchEffect('language', 'zh')
   return (
     <IntlProvider locale={ language } messages={message[language]}>
       <Router />

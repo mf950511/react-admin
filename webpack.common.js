@@ -107,7 +107,8 @@ module.exports = {
       "api": path.resolve(__dirname, 'src/api'),
       "types": path.resolve(__dirname, 'src/types'),
       "lib": path.resolve(__dirname, 'src/lib'),
-      "language": path.resolve(__dirname, 'src/language')
+      "language": path.resolve(__dirname, 'src/language'),
+      "hooks": path.resolve(__dirname, 'src/hooks')
     }
   },
   plugins: [

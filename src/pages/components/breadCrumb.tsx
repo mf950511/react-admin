@@ -4,7 +4,7 @@ const { useEffect, useState } = React
 import { Breadcrumb } from 'antd'
 import { RouteInfo } from 'types/home'
 import { SideBar } from 'store/menu/types'
-import { menuDispatchEffect } from 'store/menu/effect'
+import { useMenuDispatchEffect } from 'hooks/menu/effect'
 import { useIntl, FormattedMessage } from 'react-intl'
 import { IntlMessage } from 'language/type'
 import { messages } from 'language/intl'
@@ -22,7 +22,7 @@ const BreadCrumb = () => {
   const [currentRoute, setCurrentRoute] = useState([])
 
   // redux菜单栏
-  const [menuInfo] = menuDispatchEffect()
+  const [menuInfo] = useMenuDispatchEffect()
   // 国际语言切换
   const intl = useIntl()
   const getIntl = (intlName: IntlMessage) => intlName && intl.formatMessage(messages[intlName])
@@ -64,7 +64,7 @@ const BreadCrumb = () => {
   }, [menuInfo])
 
   const navToLink = (link: string) => {
-    let realLink = recursion(link)
+    const realLink = recursion(link)
     if(currentRoute && currentRoute[currentRoute.length - 1] === realLink) {
       return 
     } else {
@@ -74,7 +74,7 @@ const BreadCrumb = () => {
 
   const recursion: (link: string) => string = (link: string) => {
     for(let i = 0; i < homeRouter.length; i++) {
-      let route = homeRouter[i]
+      const route = homeRouter[i]
       if(route.from === link) {
         console.log(2345, link)
         return recursion(route.to)

@@ -23,6 +23,7 @@
       "pages/*": ["pages/*"],
       "common/*": ["common/*"],
       "api/*": ["api/*"],
+      "hooks/*": ["hooks/*"],
     },
   },
   "include": [

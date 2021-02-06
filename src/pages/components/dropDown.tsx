@@ -3,17 +3,16 @@ import { Dropdown, Menu, Avatar } from 'antd'
 import { post } from 'api/request'
 import { useHistory } from 'react-router-dom'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { normalDispatchEffect } from 'store/normal/effect'
 import avator from 'common/image/avator_small.gif'
 import { useIntl } from 'react-intl'
 import { IntlMessage } from 'language/type'
 import { messages } from 'language/intl'
+import { removeStorage } from 'lib/untils'
 
 
 
 const DropDown = () => {
   const history = useHistory()
-  const [sessionId, setSessionId] = normalDispatchEffect('sessionId', '')
   const intl = useIntl()
   const getIntl = (intlName: IntlMessage) => intl.formatMessage(messages[intlName])
 
@@ -24,7 +23,7 @@ const DropDown = () => {
       case 'logout':
         post('/user/logout').then(res => {
           history.push('/login')
-          setSessionId('')
+          removeStorage('sessionId')
         })
         return
       default:

@@ -7,7 +7,7 @@ import { Route, Redirect, HashRouter as Router, Switch as RouterSwitch, useLocat
 import LeftMenu from './components/menu'
 import BreadCrumb from './components/breadCrumb'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import { normalDispatchEffect } from 'store/normal/effect'
+import { useDispatchEffect } from 'hooks/normal/effect'
 import Events from 'lib/events'
 import DropDown from './components/dropDown'
 import LanguageDropDown from './components/languageDropDown'
@@ -22,7 +22,7 @@ const Home = () => {
   const [inProp, setInProp] = useState(false);
   const location = useLocation()
   // 切换侧边栏收起状态
-  const [collapsed, setCollapsed] = normalDispatchEffect('collapsed', false)
+  const [collapsed, setCollapsed] = useDispatchEffect('collapsed', false)
 
 
   // 切换菜单收起状态
