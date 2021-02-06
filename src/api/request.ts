@@ -8,18 +8,18 @@
  */ 
 import axios from 'axios'
 import './config.ts'
+import { RequestCallback, GetOrPostRequestCallback } from './type'
 
-const request = async (_options: any) => {
+const request: RequestCallback = async (_options) => {
   // 默认GET方法
-  const method = _options.method || 'GET'
   return axios(_options)
 }
 
-const get = (url: string, params: any = {}, _options: any = {}) => {
-  return request({ ..._options, params, url, method: 'GET' })
+const get: GetOrPostRequestCallback = (url, data = {}, _options = {}) => {
+  return request({ ..._options, data, url, method: 'GET' })
 }
 
-const post = (url: string, data: any = {}, _options: any = {}) => {
+const post:GetOrPostRequestCallback = (url, data = {}, _options = {}) => {
   return request({ ..._options, data, url, method: 'POST' })
 }
 
