@@ -14,7 +14,7 @@
 
 ### 项目地址
 
-- [效果演示地址](http://47.104.71.163/react-admin/index.html#/login) 所处地区域名备案太麻烦，暂时先用ip访问吧
+- [效果演示地址](http://1.15.52.173/react-admin/index.html#/login) 所处地区域名备案太麻烦，暂时先用ip访问吧
 
 ### 分支说明
 
@@ -49,12 +49,12 @@ npm run check
 
 ## 相关开发文档
 
-- [从零构建一个react-hooks的后台管理系统(1) -- 项目配置](http://47.104.71.163/blog/react_md_1/)
-- [从零构建一个react-hooks的后台管理系统(2) -- 项目配置](http://47.104.71.163/blog/react_md_2/)
-- [从零构建一个react-hooks的后台管理系统(3) -- 项目配置](http://47.104.71.163/blog/react_md_3/)
-- [从零构建一个react-hooks的后台管理系统(4) -- 项目问题修复](http://47.104.71.163/blog/react_md_4/)
-- [从零构建一个react-hooks的后台管理系统(5) -- webpack打包优化](http://47.104.71.163/blog/react_md_5/)
-- [从零构建一个react-hooks的后台管理系统(6) -- ESLint引入](http://47.104.71.163/blog/react_md_6/)
+- [从零构建一个react-hooks的后台管理系统(1) -- 项目配置](http://1.15.52.173/blog/react_md_1/)
+- [从零构建一个react-hooks的后台管理系统(2) -- 项目配置](http://1.15.52.173/blog/react_md_2/)
+- [从零构建一个react-hooks的后台管理系统(3) -- 项目配置](http://1.15.52.173/blog/react_md_3/)
+- [从零构建一个react-hooks的后台管理系统(4) -- 项目问题修复](http://1.15.52.173/blog/react_md_4/)
+- [从零构建一个react-hooks的后台管理系统(5) -- webpack打包优化](http://1.15.52.173/blog/react_md_5/)
+- [从零构建一个react-hooks的后台管理系统(6) -- ESLint引入](http://1.15.52.173/blog/react_md_6/)
 - [react hooks 下使用redux](https://juejin.im/post/5f0d80d65188252e884e8228)
 - [react hooks下封装通用redux](https://juejin.im/post/5f0d95e66fb9a07eb90cbdd8)
 
