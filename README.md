@@ -8,6 +8,8 @@
 --> 
 # React-admin
 
+## 暂时停更，最近才发现自己写的是个什么玩意，待时机成熟后进行进一步的优化与后续更新
+
 ## 开发背景
 
 之前有看到[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)的项目，喜欢它构建的后台管理系统，但是是基于vue的，所以想要用react实现一个相同的管理系统，并附上开发教程
